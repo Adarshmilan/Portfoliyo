@@ -67,12 +67,12 @@ export default function Landing() {
             />
             
 
-            <div className=" z-20 min-h-screen w-full flex justify-center items-end pb-40 pointer-events-none" >
-                <div className="fixed w-full">
+            <div className=" z-20 min-h-screen w-full flex justify-center items-end pb-20 md:pb-40 pointer-events-none" >
+                <div className="fixed w-full px-4 md:px-0">
                     <h1
-                        className="text-6xl tracking-[3px] left-0 w-full text-center font-bold absolute"
+                        className="text-3xl md:text-6xl tracking-[3px] left-0 w-full text-center font-bold absolute"
                         style={{
-                        fontSize: '7rem',
+                        fontSize: 'clamp(2rem, 8vw, 7rem)',
                         color: '#000000',
                         fontFamily: "'Lora', serif",
                         transform: `translateX(-${maintexbgtx}px) `,
@@ -82,9 +82,9 @@ export default function Landing() {
                         ADARSH MILAN
                     </h1>
                     <h1
-                        className="text-6xl text-center font-bold relative"
+                        className="text-3xl md:text-6xl text-center font-bold relative"
                         style={{
-                        fontSize: '7rem',
+                        fontSize: 'clamp(2rem, 8vw, 7rem)',
                         color: '#d6d6d6',
                         fontFamily: "'Lora', serif",
                         transform: `translateX(-${maintextx}px) `,
@@ -97,10 +97,10 @@ export default function Landing() {
             </div>
 
 
-            <div className=' pt-100 fixed top-0 left-0 w-full smallaboutme px-10' >
+            <div className=' pt-20 md:pt-100 fixed top-0 left-0 w-full smallaboutme px-4 md:px-10' >
                 <p
                 style={{
-                    fontSize:'1.5rem',
+                    fontSize:'clamp(1rem, 4vw, 1.5rem)',
                     fontFamily:"'Quicksand', sans-serif",
                     color:'#ffffff',
                     transform: `translateX(${smallaboutmetx1}px)`,
@@ -116,7 +116,7 @@ export default function Landing() {
                  
                 <p
                 style={{
-                    fontSize:'1.5rem',
+                    fontSize:'clamp(1rem, 4vw, 1.5rem)',
                     fontFamily:"'Quicksand', sans-serif",
                     color:'#ffffff',
                     transform: `translateX(${smallaboutmetx2}px)`,
@@ -132,7 +132,7 @@ export default function Landing() {
 
                 <p
                 style={{
-                    fontSize:'1.5rem',
+                    fontSize:'clamp(1rem, 4vw, 1.5rem)',
                     fontFamily:"'Quicksand', sans-serif",
                     color:'#ffffff',
                     transform: `translateX(${smallaboutmetx3}px)`,

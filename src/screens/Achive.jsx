@@ -54,13 +54,13 @@ export default function Achive() {
     ];
 
     return (
-        <div className='achive h-screen flex flex-row content-center justify-center justify-items-center  w-full px-8 py-20' style={{
+        <div className='achive h-auto md:h-screen flex flex-col md:flex-row content-center justify-center justify-items-center w-full px-4 md:px-8 py-12 md:py-20' style={{
             background: 'linear-gradient(to bottom, #080807 0%, #1a1a16 100% )',
             position: 'relative',
             overflow: 'hidden',
         }}>
             {/* Header Section */}
-            <div className='text-center flex items-start flex-col w-full mb-12 content-center justify-center justify-items-center items-center'>
+            <div className='text-center flex items-start flex-col w-full mb-8 md:mb-12 content-center justify-center justify-items-center items-center'>
                 <h1 style={{
                     fontSize: '5rem',
                     fontWeight: 'bold',

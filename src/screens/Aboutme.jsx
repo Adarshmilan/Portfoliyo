@@ -30,12 +30,13 @@ export default function Aboutme() {
 
 
     return(
-        <div className="flex justify-around items-center flex-row w-full"
+        <div className="flex justify-around items-center flex-col md:flex-row w-full"
         style={{
             backgroundImage: `url(${gifbg})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            height: '105vh',
+            height: 'auto',
+            minHeight: '105vh',
             borderBottomLeftRadius: '100px',
             borderBottomRightRadius: '100px',
             position: 'relative',
@@ -43,7 +44,7 @@ export default function Aboutme() {
             '--rotation': `${rotation/2}deg`,
             
         }}>
-            <div className="aboutmemain pl-50 w-1/2">
+            <div className="aboutmemain pl-0 md:pl-50 w-full md:w-1/2 px-4 md:px-0 py-8 md:py-0">
                 <ProfileCard
                 name="Adarsh Milan"
                 title="Software Engineer"
@@ -62,7 +63,7 @@ export default function Aboutme() {
                 />
             </div>
 
-            <div className="w-1/1.7">
+            <div className="w-full md:w-1/1.7 px-4 md:px-0 py-8 md:py-0">
                 <ScrambledText
                 className="scrambled-text-demo"
                 radius={100}

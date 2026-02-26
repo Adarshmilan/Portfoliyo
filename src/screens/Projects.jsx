@@ -117,15 +117,15 @@ export default function Projects() {
   }, []);
 
   return (
-    <div className="projects-section flex flex-row relative">
+    <div className="projects-section flex flex-col md:flex-row relative">
       {/* Left sticky side */}
-      <div className="projects-left w-[50vw] sticky top-0 h-screen flex items-center justify-center">
+      <div className="projects-left w-full md:w-[50vw] sticky top-0 h-auto md:h-screen flex items-center justify-center py-12 md:py-0">
         <Projectleft id={activeProject.id} name={activeProject.name} video={activeProject.video} />
       </div>
 
-      {/* Bumpy Divider */}
+      {/* Bumpy Divider - Hidden on mobile */}
       <svg 
-        className="absolute left-1/2 top-0 h-full transform -translate-x-1/2" 
+        className="absolute left-1/2 top-0 h-full transform -translate-x-1/2 hidden md:block" 
         width="40" 
         viewBox="0 0 40 1200" 
         preserveAspectRatio="none"
@@ -142,12 +142,12 @@ export default function Projects() {
       </svg>
 
       {/* Right scrollable side */}
-      <div className="projects-right w-[50vw]">
+      <div className="projects-right w-full md:w-[50vw]">
         {projectsData.map((project, index) => (
           <div 
             key={project.id}
             ref={(el) => projectRefs.current[index] = el}
-            className='h-screen flex items-center justify-center'
+            className='h-auto md:h-screen flex items-center justify-center py-12 md:py-0'
           >
             <Projectright 
               id={project.id} 

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { IconCloud } from "../components/ui/icon-cloud";
 import Progress from "../components/progress";
 import background from '../assets/skillbg.jpg';
@@ -114,8 +114,15 @@ const skillsCategoryData = {
 export default function Skills() {
     const [iclouddiss, setIclouddiss] = useState(0);
     const [skillstranslatepx, setSkillstranslatepx] = useState(0);
-    const [selectedSkill, setSelectedSkill] = useState(skillsDataArray[0]);
+    const [selectedSkill, setSelectedSkillState] = useState(skillsDataArray[0]);
     const [bgColor, setBgColor] = useState('#061921');
+    
+    const images = useMemo(() => Object.values(iconMap), []);
+    const memoizedSkillsData = useMemo(() => skillsDataArray, []);
+    
+    const setSelectedSkill = useCallback((skill) => {
+        setSelectedSkillState(skill);
+    }, []);
     
     useEffect(() => {
         const handleScroll = () => {
@@ -142,8 +149,6 @@ export default function Skills() {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
-
-    const images = Object.values(iconMap);
 
     const SkillCard = ({ skill }) => (
         <div className="flex flex-col items-center justify-center gap-2 p-3 rounded-lg hover:bg-blue-900 hover:bg-opacity-30 transition-all duration-300">
@@ -195,7 +200,7 @@ export default function Skills() {
                         transform: `translateX(-${iclouddiss}px)`,
                         transition: 'transform 0.5s ease-out',
                     }}>
-                    <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 px-4 md:px-0">
                         {Object.entries(skillsCategoryData).map(([category, skills]) => (
                             <div key={category} className="flex flex-col">
                                 <h3 className="text-xl font-bold text-cyan-400 mb-4 pb-2 border-b border-cyan-400 border-opacity-30">
@@ -218,7 +223,7 @@ export default function Skills() {
                         transition: 'transform 0.5s ease-out',
                     }}>
                     <Progress 
-                        skillsData={skillsDataArray}
+                        skillsData={memoizedSkillsData}
                         selectedSkill={selectedSkill}
                         setSelectedSkill={setSelectedSkill}
                     />
