@@ -1,0 +1,23 @@
+html{
+  scroll-behavior: smooth;
+  transition: scroll 2.5s ease-in-out;
+}
+
+.projects-section {
+  display: flex;
+  width: 100vw;
+  background-color: #080807;
+}
+
+.projects-left {
+  position: sticky;
+  top: 0;
+  background-color: #080807;
+}
+
+.projects-right {
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
