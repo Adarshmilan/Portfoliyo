@@ -142,12 +142,12 @@ export default function Projects() {
       </svg>
 
       {/* Right scrollable side */}
-      <div className="projects-right w-full md:w-[50vw]">
+      <div className="projects-right w-full  md:w-[50vw]">
         {projectsData.map((project, index) => (
           <div 
             key={project.id}
             ref={(el) => projectRefs.current[index] = el}
-            className='h-auto md:h-screen flex items-center justify-center py-12 md:py-0'
+            className='h-auto  flex items-center justify-center my-12 md:py-0'
           >
             <Projectright 
               id={project.id} 

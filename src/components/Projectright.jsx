@@ -6,7 +6,7 @@ import { RainbowButton } from './ui/rainbow-button.tsx';
 export default function Projectright({ id,name ,description,technologies,link,live }) {
 
     return(
-        <div className='flex w-[40vw] justify-around h-screen content-center flex-col ' >
+        <div className='flex w-[40vw] justify-around h-auto  content-center flex-col ' >
             <div className="name basis-[20%] text-6xl font-bold text-white" >
                 <DecryptedText
                     text={name}
