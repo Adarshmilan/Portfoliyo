@@ -23,14 +23,18 @@
   -webkit-backface-visibility: hidden;
 }
 
+/* Phones: card stack sits in normal flow, centred under the heading.
+   Cards pile straight back, with their top edges peeking out above. */
 @media (max-width: 768px) {
-  .card-swap-container {
-    transform: scale(0.75) translate(25%, 25%);
+  .card-swap-area {
+    padding-top: 90px;
   }
-}
 
-@media (max-width: 480px) {
   .card-swap-container {
-    transform: scale(0.55) translate(25%, 25%);
+    position: relative;
+    bottom: auto;
+    right: auto;
+    margin: 0 auto;
+    transform: none;
   }
 }

@@ -46,17 +46,18 @@ export default function Projectleft({ id,name ,video }) {
     }, [isVisible, video]);
 
     return(
-        <div ref={containerRef} className="projectleft  sticky h-screen w-[40vw] flex flex-col justify-around content" >
-            <h1 className="basis-[15%] text-9xl font-bold text-white" >{id}</h1>
+        <div ref={containerRef} className="projectleft md:sticky h-auto md:h-screen w-full md:w-[40vw] flex flex-col justify-around gap-3 md:gap-0" >
+            <h1 className="basis-[15%] text-6xl md:text-9xl font-bold text-white" >{id}</h1>
             <div><video 
                 ref={videoRef}
                 src={video} 
                 loop 
                 muted 
                 preload="metadata"
-                className="project-video basis-[70%]" 
+                playsInline
+                className="project-video basis-[70%] w-full rounded-lg" 
             /></div>
-            <div className=" basis-[15%] flex justify-end-safe w-full "><h2 className=" text-4xl font-bold text-white" >{name}</h2></div>
+            <div className=" basis-[15%] hidden md:flex justify-end-safe w-full "><h2 className="text-2xl md:text-4xl font-bold text-white text-right" >{name}</h2></div>
         </div>
     )
 }

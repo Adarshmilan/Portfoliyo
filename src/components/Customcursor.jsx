@@ -2,7 +2,14 @@
 import { useEffect, useRef, useState } from 'react';
 import cursorImage from '../assets/moon.png'; 
 
+const hasMouse = () =>
+  typeof window !== 'undefined' && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
 export default function CustomCursor() {
+  return hasMouse() ? <MoonCursor /> : null;
+}
+
+function MoonCursor() {
   const cursorRef = useRef(null);
   const [rotation, setRotation] = useState(0);
 

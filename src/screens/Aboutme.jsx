@@ -3,12 +3,14 @@ import abphoto from '../assets/aboutmenew.jpg';
 import gifbg from '../assets/space_bg.gif';
 import ProfileCard from '../components/ProfileCard.jsx';
 import ScrambledText from '../components/ScrambledText.jsx';
+import useIsMobile from '../lib/useIsMobile.js';
 
 
 export default function Aboutme() {
 
 
     const [rotation, setRotation] = useState(0);
+    const isMobile = useIsMobile();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -36,15 +38,17 @@ export default function Aboutme() {
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             height: 'auto',
-            minHeight: '105vh',
-            borderBottomLeftRadius: '100px',
-            borderBottomRightRadius: '100px',
+            minHeight: isMobile ? 'auto' : '105vh',
+            paddingTop: isMobile ? '48px' : undefined,
+            paddingBottom: isMobile ? '22vh' : undefined,
+            borderBottomLeftRadius: isMobile ? '40px' : '100px',
+            borderBottomRightRadius: isMobile ? '40px' : '100px',
             position: 'relative',
             zIndex: '0',
             '--rotation': `${rotation/2}deg`,
             
         }}>
-            <div className="aboutmemain pl-0 md:pl-50 w-full md:w-1/2 px-4 md:px-0 py-8 md:py-0">
+            <div className="aboutmemain flex justify-center md:block w-full md:w-1/2 px-4 md:px-0 md:pl-50 py-8 md:py-0">
                 <ProfileCard
                 name="Adarsh Milan"
                 title="Software Engineer"
@@ -63,7 +67,7 @@ export default function Aboutme() {
                 />
             </div>
 
-            <div className="w-full md:w-1/1.7 px-4 md:px-0 py-8 md:py-0">
+            <div className="w-full md:w-1/1.7 px-2 md:px-0 py-4 md:py-0">
                 <ScrambledText
                 className="scrambled-text-demo"
                 radius={100}

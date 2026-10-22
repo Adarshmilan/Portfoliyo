@@ -4,10 +4,10 @@ import { AnimatedCircularProgressBar } from "./ui/animated-circular-progress-bar
 
 export default function Progress({ skillsData, selectedSkill, setSelectedSkill }) {
     return (
-        <div className="w-screen  h-full flex flex-row item-center content-center justify-around gap-8">
-            <div className="progressbuttons w-[40vw] flex-1 flex flex-col item-center justify-center content-center gap-4">
+        <div className="w-full md:w-screen h-full flex flex-col-reverse md:flex-row items-stretch md:items-center justify-around gap-6 md:gap-8">
+            <div className="progressbuttons w-full md:w-[40vw] flex-1 flex flex-col justify-center gap-4">
                 <h2 className="text-2xl font-bold text-white mb-4">Skills</h2>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 overflow-y-auto max-h-96">
+                <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-3 md:overflow-y-auto md:max-h-96">
                     {skillsData.map((skill) => (
                         <CoolMode 
                             key={skill.name}
@@ -23,7 +23,7 @@ export default function Progress({ skillsData, selectedSkill, setSelectedSkill }
                                     width: '100%',
                                     padding: '8px',
                                     cursor: 'pointer',
-                                    fontSize: '14px',
+                                    fontSize: '13px',
                                     fontWeight: '500'
                                 }}
                                 type="button"
@@ -37,7 +37,7 @@ export default function Progress({ skillsData, selectedSkill, setSelectedSkill }
 
             <div className="progress flex-1 flex flex-col items-center content-center justify-center gap-8">
                 <h2 className="text-2xl font-bold text-white">Proficiency</h2>
-                <div className="flex flex-wrap gap-8 justify-center items-center">
+                <div className="flex flex-wrap gap-6 md:gap-8 justify-center items-center">
                     <AnimatedCircularProgressBar 
                         max={100}
                         value={selectedSkill.progress}
@@ -45,7 +45,7 @@ export default function Progress({ skillsData, selectedSkill, setSelectedSkill }
                         gaugeSecondaryColor="#01245c"
                     />
                     <div className="flex flex-col justify-center gap-4 text-white">
-                        <h3 className="text-3xl font-bold text-white">{selectedSkill.name}</h3>
+                        <h3 className="text-2xl md:text-3xl font-bold text-white">{selectedSkill.name}</h3>
                         <p className="text-lg text-white">
                             Proficiency: <span className="font-bold text-white">{selectedSkill.progress}%</span>
                         </p>

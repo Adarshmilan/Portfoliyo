@@ -6,8 +6,8 @@ import { RainbowButton } from './ui/rainbow-button.tsx';
 export default function Projectright({ id,name ,description,technologies,link,live }) {
 
     return(
-        <div className='flex w-[40vw] justify-around h-auto  content-center flex-col ' >
-            <div className="name basis-[20%] text-6xl font-bold text-white" >
+        <div className='flex w-full md:w-[40vw] justify-around h-auto content-center flex-col' >
+            <div className="name basis-[20%] text-3xl md:text-6xl font-bold text-white" >
                 <DecryptedText
                     text={name}
                     speed={100}
@@ -29,7 +29,7 @@ export default function Projectright({ id,name ,description,technologies,link,li
                     {description}
                 </ScrollReveal>
             </div >
-            <div  className="link basis-[10%] flex flex-row justify-between pr-8 mt-4" >
+            <div  className="link basis-[10%] flex flex-row justify-between gap-3 md:pr-8 mt-4" >
                 <RainbowButton 
                     variant="outline"
                     onClick={() => window.open(live, '_blank')}

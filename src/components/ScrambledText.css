@@ -6,6 +6,14 @@
   color: #fff;
 }
 
+@media (max-width: 768px) {
+  .text-block {
+    margin: 0 4vw;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+}
+
 .char {
   will-change: transform;
   display: inline-block;

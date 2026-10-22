@@ -1,5 +1,7 @@
 # 🚀 Adarsh Milan – Space-Themed Portfolio
 
+🌐 **Live site:** [portfoliyo-zeta-indol.vercel.app](https://portfoliyo-zeta-indol.vercel.app/)
+
 My personal developer portfolio, built with **React 19 + Vite** and packed with animations: smooth scrolling, particle backgrounds, scrambled/decrypted text effects, a 3D-feeling profile card, an interactive skills icon cloud and a working contact form.
 
 ## ✨ Sections

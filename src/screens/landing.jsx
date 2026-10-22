@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import mainheadshot from '../assets/longmain.jpg';
 import {Highlighter} from '../components/Highlignt.jsx';
+import useIsMobile from '../lib/useIsMobile.js';
 
 
 
@@ -8,6 +9,16 @@ export default function Landing() {
     const [scrollY, setScrollY] = useState(0);
     const [viewportHeight, setViewportHeight] = useState(window.innerHeight);
     const [viewportWidth, setViewportWidth] = useState(window.innerWidth);
+    const isMobile = useIsMobile();
+
+    useEffect(() => {
+        const handleResize = () => {
+            setViewportHeight(window.innerHeight);
+            setViewportWidth(window.innerWidth);
+        };
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     // Handle scroll event
     useEffect(() => {
@@ -23,9 +34,9 @@ export default function Landing() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const scale = 1.1 + scrollY * 0.004;
-    const translateY = ((scrollY * 0.095)/100) * viewportHeight;
-    const translateX = ((scrollY * 0.325)/100) * viewportHeight;
+    const scale = isMobile ? 1 + scrollY * 0.002 : 1.1 + scrollY * 0.004;
+    const translateY = isMobile ? 0 : ((scrollY * 0.095)/100) * viewportHeight;
+    const translateX = isMobile ? 0 : ((scrollY * 0.325)/100) * viewportHeight;
 
     const maintexbgtx = ((scrollY * 1.9)/100) * viewportHeight;
     const maintextx = scrollY >  30 ? (((scrollY - 30) * 2.4)/100) * viewportHeight : 0;
@@ -42,12 +53,12 @@ export default function Landing() {
             <div
                 style={{
                     position: 'fixed',
-                    top: '20px',
-                    left: '20px',
-                    right: '20px',
-                    bottom: '20px',
+                    top: isMobile ? '10px' : '20px',
+                    left: isMobile ? '10px' : '20px',
+                    right: isMobile ? '10px' : '20px',
+                    bottom: isMobile ? '10px' : '20px',
                     border: '2px solid #000000',
-                    borderRadius: '20px',
+                    borderRadius: isMobile ? '14px' : '20px',
                     pointerEvents: 'none',
                     zIndex: 0,
                     boxShadow: '0 0 0 9999px rgba(0, 0, 0, 0.7)',
@@ -58,7 +69,8 @@ export default function Landing() {
             <div className="fixed -z-10 inset-0 "
                 style={{
                     backgroundImage: `url(${mainheadshot})`,
-                    backgroundSize: '100% ',
+                    backgroundSize: isMobile ? 'cover' : '100% ',
+                    backgroundPosition: isMobile ? '50% top' : undefined,
                     backgroundRepeat: 'no-repeat',
                     transform: `scale(${scale}) translateX(${translateX}px) translateY(-${translateY}px)`,
                     transformOrigin: 'top',
@@ -97,7 +109,9 @@ export default function Landing() {
             </div>
 
 
-            <div className=' pt-20 md:pt-100 fixed top-0 left-0 w-full smallaboutme px-4 md:px-10' >
+            <div className=' pt-[60vh] md:pt-100 fixed top-0 left-0 w-full smallaboutme px-6 md:px-10'
+                style={{ textShadow: isMobile ? '0 2px 10px rgba(0,0,0,0.85)' : undefined }}
+            >
                 <p
                 style={{
                     fontSize:'clamp(1rem, 4vw, 1.5rem)',
@@ -126,7 +140,7 @@ export default function Landing() {
                 <Highlighter action="highlight" color="#87CEFA">
                     learn tech
                 </Highlighter>{" "}
-                I build with it. Merging a <br /> 
+                I build with it. Merging a{" "}{!isMobile && <br />}
                 
                 </p> <br/>
 

@@ -23,7 +23,7 @@ const ScrambledText = ({
     if (!rootRef.current) return;
 
     const split = SplitText.create(rootRef.current.querySelector('p'), {
-      type: 'chars',
+      type: 'words,chars',
       charsClass: 'char'
     });
     charsRef.current = split.chars;

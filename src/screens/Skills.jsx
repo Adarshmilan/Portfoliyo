@@ -1,4 +1,5 @@
-import { useState, useEffect, useMemo, useCallback } from "react";
+import { useState, useEffect, useMemo, useCallback, useRef } from "react";
+import useIsMobile from "../lib/useIsMobile.js";
 import { IconCloud } from "../components/ui/icon-cloud";
 import Progress from "../components/progress";
 import background from '../assets/skillbg.jpg';
@@ -102,7 +103,7 @@ const skillsDataArray = [
 const skillsCategoryData = {
     "Programming Languages": ["typescript", "javascript", "python", "java", "c"],
     "Frontend": ["html5", "css3", "react", "bootstrap", "tailwindcss", "vite"],
-    "Backend": ["node.js", "spring", "fastapi", "apache", "apachetomcat"],
+    "Backend": ["node-dot-js", "spring", "fastapi", "apache", "apachetomcat"],
     "Databases": ["mysql", "postgresql", "mongodb", "supabase"],
     "Version Control": ["git", "github", "gnubash", "linux"],
     "Design & UI": ["figma", "photopea", "notion"],
@@ -111,77 +112,131 @@ const skillsCategoryData = {
     "Other Tools": ["apachenetbeanside", "cisco"],
 };
 
+const SkillCard = ({ skill }) => (
+    <div className="flex flex-col items-center justify-center gap-1 md:gap-2 p-2 md:p-3 rounded-lg hover:bg-blue-900 hover:bg-opacity-30 transition-all duration-300">
+        <img
+            src={iconMap[skill]}
+            alt={skill}
+            className="w-8 h-8 md:w-12 md:h-12 object-contain"
+        />
+        <span className="text-[10px] md:text-xs text-gray-300 text-center capitalize">
+            {skill.replace(/-dot-/g, '.').replace(/-/g, ' ')}
+        </span>
+    </div>
+);
+
+const SkillCategories = () => (
+    <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 px-4 md:px-0">
+        {Object.entries(skillsCategoryData).map(([category, skills]) => (
+            <div key={category} className="flex flex-col">
+                <h3 className="text-lg md:text-xl font-bold text-cyan-400 mb-3 md:mb-4 pb-2 border-b border-cyan-400 border-opacity-30">
+                    {category}
+                </h3>
+                <div className="grid grid-cols-4 gap-2 md:gap-4">
+                    {skills.map((skill) => (
+                        <SkillCard key={skill} skill={skill} />
+                    ))}
+                </div>
+            </div>
+        ))}
+    </div>
+);
+
 export default function Skills() {
     const [iclouddiss, setIclouddiss] = useState(0);
-    const [skillstranslatepx, setSkillstranslatepx] = useState(0);
     const [selectedSkill, setSelectedSkillState] = useState(skillsDataArray[0]);
     const [bgColor, setBgColor] = useState('#061921');
-    
+    const rootRef = useRef(null);
+    const isMobile = useIsMobile();
+
     const images = useMemo(() => Object.values(iconMap), []);
     const memoizedSkillsData = useMemo(() => skillsDataArray, []);
-    
+
     const setSelectedSkill = useCallback((skill) => {
         setSelectedSkillState(skill);
     }, []);
-    
+
+    // Desktop only: slide the three panels sideways while the section is pinned.
+    // Measured from where this section starts, so it stays in sync if sections above change height.
     useEffect(() => {
+        if (isMobile) return;
         const handleScroll = () => {
-            const iconcloud = ((window.scrollY > window.innerHeight*3.5) && (window.scrollY < window.innerHeight*6.5)) 
-                ? ((window.scrollY > window.innerHeight*5.5) ? 2 : ((window.scrollY - window.innerHeight*3.5) / window.innerHeight) )
-                : ((window.scrollY > window.innerHeight*5.5) ? 1 : 0);
-            setIclouddiss((iconcloud) * window.innerWidth);
-            
-            let scrollProgress = 0;
-            if (window.scrollY > window.innerHeight*3.5 && window.scrollY < window.innerHeight*5.5) {
-                scrollProgress = (window.scrollY - window.innerHeight*2.5) / (window.innerHeight*3);
-            } else if (window.scrollY >= window.innerHeight*5.5) {
-                scrollProgress = 1;
-            }
-            
+            const vh = window.innerHeight;
+            const wrapper = rootRef.current?.parentElement;
+            const start = wrapper ? wrapper.offsetTop : vh * 3.5;
+            const passed = (window.scrollY - start) / vh; // screens scrolled into this section
+
+            const panel = Math.min(2, Math.max(0, passed));
+            setIclouddiss(panel * window.innerWidth);
+
+            const scrollProgress = passed <= 0 ? 0 : Math.min(1, (passed + 1) / 3);
             const r = Math.round(6 + (8 - 6) * scrollProgress);
             const g = Math.round(25 + (8 - 25) * scrollProgress);
             const b = Math.round(33 + (7 - 33) * scrollProgress);
-            
-            const color = `rgb(${r}, ${g}, ${b})`;
-            setBgColor(color);
+            setBgColor(`rgb(${r}, ${g}, ${b})`);
         };
 
+        handleScroll();
         window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+        window.addEventListener('resize', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('resize', handleScroll);
+        };
+    }, [isMobile]);
 
-    const SkillCard = ({ skill }) => (
-        <div className="flex flex-col items-center justify-center gap-2 p-3 rounded-lg hover:bg-blue-900 hover:bg-opacity-30 transition-all duration-300">
-            <img 
-                src={iconMap[skill]} 
-                alt={skill}
-                className="w-12 h-12 object-contain"
+    const particles = (
+        <div className="absolute inset-0 w-full h-full pointer-events-auto">
+            <Particles
+                particleColors={["#ffffff"]}
+                particleCount={isMobile ? 100 : 200}
+                particleSpread={10}
+                speed={0.1}
+                particleBaseSize={100}
+                moveParticlesOnHover
+                alphaParticles={false}
+                disableRotation={false}
+                pixelRatio={1}
             />
-            <span className="text-xs text-gray-300 text-center capitalize">
-                {skill.replace(/-/g, ' ').replace('-dot-js', '.js').replace(/-dot-/g, '.')}
-            </span>
         </div>
     );
 
+    // Phones: simple vertical stack (cloud -> categories -> proficiency)
+    if (isMobile) {
+        return (
+            <div ref={rootRef} className="w-full relative overflow-hidden"
+                style={{ background: 'linear-gradient(to bottom, #061921 0%, #080807 100%)' }}
+            >
+                {particles}
+                <div className="relative z-10 flex flex-col gap-12 py-16">
+                    <h2 className="text-4xl font-bold text-white text-center" style={{ fontFamily: "'Lora', serif" }}>
+                        Skills
+                    </h2>
+                    <div className="w-full flex justify-center px-4">
+                        <div className="w-full max-w-[420px] flex justify-center">
+                            <IconCloud images={images} />
+                        </div>
+                    </div>
+                    <SkillCategories />
+                    <div className="px-4">
+                        <Progress
+                            skillsData={memoizedSkillsData}
+                            selectedSkill={selectedSkill}
+                            setSelectedSkill={setSelectedSkill}
+                        />
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
     return(
-        <div className="w-full min-h-screen sticky  top-0 overflow-hidden relative"
+        <div ref={rootRef} className="w-full min-h-screen sticky  top-0 overflow-hidden relative"
         style={{backgroundColor: bgColor,
 
         }}
         >
-            <div className="absolute inset-0 w-full h-full pointer-events-auto">
-                <Particles
-                    particleColors={["#ffffff"]}
-                    particleCount={200}
-                    particleSpread={10}
-                    speed={0.1}
-                    particleBaseSize={100}
-                    moveParticlesOnHover
-                    alphaParticles={false}
-                    disableRotation={false}
-                    pixelRatio={1}
-                />
-            </div>
+            {particles}
 
             <div className="relative z-10 flex flex-row w-full overflow-x-hidden">
                 {/* Icon Cloud Section */}
@@ -200,20 +255,7 @@ export default function Skills() {
                         transform: `translateX(-${iclouddiss}px)`,
                         transition: 'transform 0.5s ease-out',
                     }}>
-                    <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 px-4 md:px-0">
-                        {Object.entries(skillsCategoryData).map(([category, skills]) => (
-                            <div key={category} className="flex flex-col">
-                                <h3 className="text-xl font-bold text-cyan-400 mb-4 pb-2 border-b border-cyan-400 border-opacity-30">
-                                    {category}
-                                </h3>
-                                <div className="grid grid-cols-4 gap-4">
-                                    {skills.map((skill) => (
-                                        <SkillCard key={skill} skill={skill} />
-                                    ))}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
+                    <SkillCategories />
                 </div>
 
                 {/* Progress/Proficiency Section */}

@@ -10,6 +10,9 @@ import cyborgVideo from '../assets/project/cyborg.mp4';
 import calcaiVideo from '../assets/project/calcai.mp4';
 import Projectleft from '../components/Projectleft';
 import Projectright from '../components/Projectright';
+import useIsMobile from '../lib/useIsMobile.js';
+import { RainbowButton } from '../components/ui/rainbow-button.tsx';
+import DecryptedText from '../components/DecryptedText.jsx';
 
 export default function Projects() {
 
@@ -83,6 +86,7 @@ export default function Projects() {
   ];
 
   const [activeProject, setActiveProject] = useState(projectsData[0]);
+  const isMobile = useIsMobile();
   const projectRefs = useRef([]);
 
   useEffect(() => {
@@ -114,7 +118,13 @@ export default function Projects() {
         if (ref) observer.unobserve(ref);
       });
     };
-  }, []);
+  }, [isMobile]);
+
+  // Phones: the section pins to the screen and each project is its own full-screen page.
+  // Scrolling down slides to the next page sideways (scrolling up slides back).
+  if (isMobile) {
+    return <MobileProjects projects={projectsData} />;
+  }
 
   return (
     <div className="projects-section flex flex-col md:flex-row relative">
@@ -160,5 +170,116 @@ export default function Projects() {
         ))}
       </div>
     </div>
+  );
+}
+
+function MobileProjects({ projects }) {
+  const wrapperRef = useRef(null);
+  const [page, setPage] = useState(0);
+  const count = projects.length;
+
+  useEffect(() => {
+    const onScroll = () => {
+      const el = wrapperRef.current;
+      if (!el) return;
+      const vh = window.innerHeight;
+      // How many screens we've scrolled into the section (0 .. count-1)
+      const passed = -el.getBoundingClientRect().top / vh;
+      const next = Math.min(count - 1, Math.max(0, Math.round(passed)));
+      setPage(next);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    };
+  }, [count]);
+
+  return (
+    // One screen of scrolling per project
+    <div ref={wrapperRef} className="relative w-full" style={{ height: `${count * 100}svh`, backgroundColor: '#080807' }}>
+      <div className="sticky top-0 w-full overflow-hidden" style={{ height: '100svh' }}>
+        <div
+          className="flex h-full"
+          style={{
+            width: `${count * 100}vw`,
+            transform: `translateX(-${page * 100}vw)`,
+            transition: 'transform 0.7s cubic-bezier(0.65, 0, 0.35, 1)',
+          }}
+        >
+          {projects.map((project, i) => (
+            <section
+              key={project.id}
+              className="w-screen h-full flex-shrink-0 flex flex-col justify-center gap-4 px-6 pt-14 pb-16"
+            >
+              <div className="flex items-end justify-between">
+                <span className="text-6xl font-bold text-white leading-none">{project.id}</span>
+                <span className="text-xs tracking-[3px] text-gray-400 uppercase">Projects</span>
+              </div>
+
+              <Projectvideo video={project.video} active={i === page} />
+
+              <h3 className="text-2xl font-bold text-white">
+                {i === page ? (
+                  <DecryptedText
+                    text={project.name}
+                    speed={60}
+                    maxIterations={10}
+                    characters="ABCD1234!?"
+                    animateOn="view"
+                  />
+                ) : project.name}
+              </h3>
+
+              <p className="text-[0.9rem] leading-relaxed text-gray-300">{project.description}</p>
+
+              <div className="flex justify-between gap-3 mt-1">
+                <RainbowButton variant="outline" onClick={() => project.live && window.open(project.live, '_blank')}>
+                  {project.live ? 'Live' : 'Not deployed'}
+                </RainbowButton>
+                <RainbowButton variant="outline" onClick={() => window.open(project.link, '_blank')}>
+                  Github
+                </RainbowButton>
+              </div>
+            </section>
+          ))}
+        </div>
+
+        {/* Page dots */}
+        <div className="absolute bottom-5 left-0 w-full flex justify-center gap-2 pointer-events-none">
+          {projects.map((p, i) => (
+            <span
+              key={p.id}
+              className="h-1.5 rounded-full transition-all duration-500"
+              style={{ width: i === page ? 22 : 6, backgroundColor: i === page ? '#ffffff' : 'rgba(255,255,255,0.3)' }}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Plays only while its page is on screen
+function Projectvideo({ video, active }) {
+  const ref = useRef(null);
+  useEffect(() => {
+    const v = ref.current;
+    if (!v) return;
+    if (active) v.play().catch(() => {});
+    else v.pause();
+  }, [active]);
+  return (
+    <video
+      ref={ref}
+      src={video}
+      loop
+      muted
+      playsInline
+      preload="metadata"
+      className="w-full rounded-lg border border-white/10 max-h-[28svh] object-cover bg-black"
+    />
   );
 }

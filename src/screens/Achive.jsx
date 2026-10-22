@@ -6,8 +6,10 @@ import cybersecurity from '../assets/certificate/cybersecurity.jpg';
 import hackathon from '../assets/certificate/hackathon.jpg';
 import playItSafe from '../assets/certificate/playitsafe.jpg';
 import toolsOfTrade from '../assets/certificate/toolsoftrade.jpg';
+import useIsMobile from '../lib/useIsMobile.js';
 
 export default function Achive() {
+    const isMobile = useIsMobile();
     const achievementData = [
         {
             id: 1,
@@ -54,7 +56,7 @@ export default function Achive() {
     ];
 
     return (
-        <div className='achive h-auto md:h-screen flex flex-col md:flex-row content-center justify-center justify-items-center w-full px-4 md:px-8 py-12 md:py-20' style={{
+        <div className='achive h-auto md:h-screen flex flex-col md:flex-row content-center justify-center justify-items-center w-full px-5 md:px-8 pt-16 pb-24 md:py-20' style={{
             background: 'linear-gradient(to bottom, #080807 0%, #1a1a16 100% )',
             position: 'relative',
             overflow: 'hidden',
@@ -62,35 +64,40 @@ export default function Achive() {
             {/* Header Section */}
             <div className='text-center flex items-start flex-col w-full mb-8 md:mb-12 content-center justify-center justify-items-center items-center'>
                 <h1 style={{
-                    fontSize: '5rem',
+                    fontSize: 'clamp(2.75rem, 12vw, 5rem)',
+                    lineHeight: 1.1,
                     fontWeight: 'bold',
                     background: 'linear-gradient(135deg, #d2d2d2 0%, #9b9b9b 50%, #717171 100%)',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
-                    marginBottom: '1.5rem',
+                    marginBottom: isMobile ? '1rem' : '1.5rem',
                     letterSpacing: '2px',
                     textAlign: 'left',
                 }}>
                     Leveling Up
                 </h1>
                 <p style={{
-                    fontSize: '1.2rem',
+                    fontSize: isMobile ? '1rem' : '1.2rem',
                     color: '#b0bec5',
                     maxWidth: '800px',
                     margin: '0 auto',
-                    lineHeight: '1.8',
+                    lineHeight: isMobile ? '1.6' : '1.8',
                     fontFamily: "'Quicksand', sans-serif",
-                    textAlign: 'left',
+                    textAlign: isMobile ? 'center' : 'left',
                 }}>
                     Documenting my evolution from a curious builder to a dedicated engineer. This log tracks my certifications, successful deployments, and the technical benchmarks I've cleared along the way.
                 </p>
             </div>
 
             {/* Cards Section */}
-            <div className='flex justify-center w-full  items-center'>
+            <div className='card-swap-area flex justify-center w-full items-center'>
                 <CardSwap
-                    cardDistance={80}
-                    verticalDistance={80}
+                    width={isMobile ? 290 : 500}
+                    height={isMobile ? 380 : 400}
+                    cardDistance={isMobile ? 0 : 80}
+                    verticalDistance={isMobile ? 24 : 80}
+                    depthDistance={isMobile ? 40 : undefined}
+                    skewAmount={isMobile ? 0 : 6}
                     delay={100}
                     pauseOnHover={true}
                 >
@@ -102,7 +109,7 @@ export default function Achive() {
                                 flexDirection: 'column',
                                 backdropFilter: 'blur(10px)',
                                 borderRadius: '16px',
-                                padding: '24px',
+                                padding: isMobile ? '16px' : '24px',
                                 paddingTop : '0px',
                                 transition: 'all 0.3s ease',
                                 cursor: 'pointer',
@@ -113,7 +120,7 @@ export default function Achive() {
 
                                 {/* Certificate Name */}
                                 <h3 style={{
-                                    fontSize: '1.3rem',
+                                    fontSize: isMobile ? '1.1rem' : '1.3rem',
                                     fontWeight: 'bold',
                                     color: '#64b5f6',
                                     marginBottom: '12px',
@@ -124,7 +131,7 @@ export default function Achive() {
 
                                 <div style={{
                                     width: '100%',
-                                    height: '220px',
+                                    height: isMobile ? '150px' : '220px',
                                     marginBottom: '16px',
                                     background: 'linear-gradient(135deg, #424242 0%, #303030 100%)',
                                     borderRadius: '12px',
@@ -141,9 +148,9 @@ export default function Achive() {
 
                                 {/* Description */}
                                 <p style={{
-                                    fontSize: '0.95rem',
+                                    fontSize: isMobile ? '0.82rem' : '0.95rem',
                                     color: '#b0bec5',
-                                    lineHeight: '1.6',
+                                    lineHeight: isMobile ? '1.5' : '1.6',
                                     flex: 1,
                                     fontFamily: "'Quicksand', sans-serif",
                                 }}>

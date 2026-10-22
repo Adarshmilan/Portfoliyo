@@ -7,6 +7,7 @@ import Skills from "./screens/Skills.jsx";
 import Projects from "./screens/Projects.jsx";
 import Achive from './screens/Achive.jsx';
 import Contact from './screens/contact.jsx';
+import useIsMobile from './lib/useIsMobile.js';
 
 
 
@@ -15,6 +16,7 @@ import Contact from './screens/contact.jsx';
 
 function App() {
   const [scrollProgress, setScrollProgress] = useState(0);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -70,7 +72,7 @@ function App() {
           position: 'fixed',
           left: '0',
           top: 0,
-          width: '8px',
+          width: isMobile ? '4px' : '8px',
           height: `${scrollProgress}%`,
           backgroundColor: '#ffffff',
           zIndex: 999,
@@ -84,7 +86,7 @@ function App() {
           position: 'fixed',
           right: '0',
           top: 0,
-          width: '8px',
+          width: isMobile ? '4px' : '8px',
           height: `${scrollProgress}%`,
           backgroundColor: '#ffffff',
           zIndex: 999,
@@ -103,17 +105,17 @@ function App() {
         // backgroundPosition: 'center',
         // backgroundAttachment: 'scroll',
         position: 'relative',
-        height: '120vh',
+        height: isMobile ? 'auto' : '120vh',
       }}>
         <Aboutme />
       </div>
-      <div style={{ position: 'relative', height: '300vh' }}>
+      <div style={{ position: 'relative', height: isMobile ? 'auto' : '300vh' }}>
         <Skills />
       </div>
       <div style={{ backgroundColor: '#080807 ', position: 'relative' }}>
         <Projects />
       </div>
-      <div style={{ position: 'relative', height: '100vh', width: '100%' }}>
+      <div style={{ position: 'relative', height: isMobile ? 'auto' : '100vh', width: '100%' }}>
         <Achive />
       </div>
       <div style={{ position: 'relative', minHeight: '100vh', width: '100%', overflow: 'hidden' }}>
