@@ -81,7 +81,8 @@ export default function Landing() {
 
             <div className=" z-20 min-h-screen w-full flex justify-center items-end pb-20 md:pb-40 pointer-events-none" >
                 <div className="fixed w-full px-4 md:px-0">
-                    <h1
+                    <div
+                        aria-hidden="true"
                         className="text-3xl md:text-6xl tracking-[3px] left-0 w-full text-center font-bold absolute"
                         style={{
                         fontSize: 'clamp(2rem, 8vw, 7rem)',
@@ -92,7 +93,7 @@ export default function Landing() {
                         }}
                     >
                         ADARSH MILAN
-                    </h1>
+                    </div>
                     <h1
                         className="text-3xl md:text-6xl text-center font-bold relative"
                         style={{

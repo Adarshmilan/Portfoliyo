@@ -13,9 +13,9 @@ export default function Contact() {
     <section className="contact-section">
       <div className="contact-container">
         <div className={`contact-header ${animated ? 'fade-in' : ''}`}>
-          <h1 className="contact-title">
+          <h2 className="contact-title">
             <span className="gradient-text">Let's Connect</span>
-          </h1>
+          </h2>
           <p className="contact-subtitle">
             Got an idea? Let's build something incredible together.
           </p>

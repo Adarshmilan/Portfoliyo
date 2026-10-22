@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://portfoliyo-zeta-indol.vercel.app/sitemap.xml

@@ -2,18 +2,121 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary SEO -->
+    <title>Adarsh Milan | Software Engineer &amp; Full-Stack Developer Portfolio</title>
+    <meta
+      name="description"
+      content="Adarsh Milan — software engineer, full-stack developer and cybersecurity enthusiast. CSE student at Marwadi University. See my projects, skills and certifications."
+    />
+    <meta name="author" content="Adarsh Milan" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://portfoliyo-zeta-indol.vercel.app/" />
+    <meta name="theme-color" content="#080807" />
+
+    <!-- Icons -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Link previews (WhatsApp, LinkedIn, Facebook, Discord...) -->
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content="Adarsh Milan" />
+    <meta property="og:title" content="Adarsh Milan | Software Engineer &amp; Full-Stack Developer" />
+    <meta
+      property="og:description"
+      content="Portfolio of Adarsh Milan — CSE student at Marwadi University, full-stack developer and cybersecurity enthusiast. Projects, skills and certifications."
+    />
+    <meta property="og:url" content="https://portfoliyo-zeta-indol.vercel.app/" />
+    <meta property="og:image" content="https://portfoliyo-zeta-indol.vercel.app/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Adarsh Milan — Software Engineer" />
+    <meta property="og:locale" content="en_IN" />
+    <meta property="profile:first_name" content="Adarsh" />
+    <meta property="profile:last_name" content="Milan" />
+
+    <!-- X / Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Adarsh Milan | Software Engineer &amp; Full-Stack Developer" />
+    <meta
+      name="twitter:description"
+      content="Portfolio of Adarsh Milan — full-stack developer and cybersecurity enthusiast. Projects, skills and certifications."
+    />
+    <meta name="twitter:image" content="https://portfoliyo-zeta-indol.vercel.app/og-image.jpg" />
+
+    <!-- Structured data: tells Google this site is about the person "Adarsh Milan" -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Person",
+            "@id": "https://portfoliyo-zeta-indol.vercel.app/#person",
+            "name": "Adarsh Milan",
+            "url": "https://portfoliyo-zeta-indol.vercel.app/",
+            "image": "https://portfoliyo-zeta-indol.vercel.app/icon-512.png",
+            "jobTitle": "Software Engineer",
+            "description": "Computer Science and Engineering student, full-stack developer and cybersecurity enthusiast.",
+            "email": "mailto:adarshmilan92@gmail.com",
+            "alumniOf": {
+              "@type": "CollegeOrUniversity",
+              "name": "Marwadi University",
+              "address": { "@type": "PostalAddress", "addressRegion": "Gujarat", "addressCountry": "IN" }
+            },
+            "homeLocation": {
+              "@type": "Place",
+              "name": "Bokaro Steel City, Jharkhand, India"
+            },
+            "knowsAbout": [
+              "Software Engineering", "Full-Stack Development", "React", "JavaScript", "TypeScript",
+              "Java", "Spring", "Python", "FastAPI", "Node.js", "MySQL", "PostgreSQL", "MongoDB",
+              "Cybersecurity", "Computer Networking", "Linux"
+            ],
+            "sameAs": [
+              "https://github.com/Adarshmilan",
+              "https://www.linkedin.com/in/adarsh-milan-383527304",
+              "https://www.instagram.com/adlan2423/"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://portfoliyo-zeta-indol.vercel.app/#website",
+            "url": "https://portfoliyo-zeta-indol.vercel.app/",
+            "name": "Adarsh Milan",
+            "alternateName": "Adarsh Milan Portfolio",
+            "about": { "@id": "https://portfoliyo-zeta-indol.vercel.app/#person" },
+            "author": { "@id": "https://portfoliyo-zeta-indol.vercel.app/#person" }
+          }
+        ]
+      }
+    </script>
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat+Subrayada:wght@400;700&display=swap"
       rel="stylesheet"
     />
-    <title>my-portfolio</title>
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <h1>Adarsh Milan</h1>
+      <p>
+        Software Engineer, full-stack developer and cybersecurity enthusiast. Computer Science and Engineering
+        student at Marwadi University, Gujarat, from Bokaro Steel City, Jharkhand.
+      </p>
+      <p>
+        <a href="https://github.com/Adarshmilan">GitHub</a> ·
+        <a href="https://www.linkedin.com/in/adarsh-milan-383527304">LinkedIn</a> ·
+        <a href="mailto:adarshmilan92@gmail.com">Email</a>
+      </p>
+    </noscript>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

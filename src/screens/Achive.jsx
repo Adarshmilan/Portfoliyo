@@ -63,7 +63,7 @@ export default function Achive() {
         }}>
             {/* Header Section */}
             <div className='text-center flex items-start flex-col w-full mb-8 md:mb-12 content-center justify-center justify-items-center items-center'>
-                <h1 style={{
+                <h2 style={{
                     fontSize: 'clamp(2.75rem, 12vw, 5rem)',
                     lineHeight: 1.1,
                     fontWeight: 'bold',
@@ -75,7 +75,7 @@ export default function Achive() {
                     textAlign: 'left',
                 }}>
                     Leveling Up
-                </h1>
+                </h2>
                 <p style={{
                     fontSize: isMobile ? '1rem' : '1.2rem',
                     color: '#b0bec5',

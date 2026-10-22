@@ -47,7 +47,7 @@ export default function Projectleft({ id,name ,video }) {
 
     return(
         <div ref={containerRef} className="projectleft md:sticky h-auto md:h-screen w-full md:w-[40vw] flex flex-col justify-around gap-3 md:gap-0" >
-            <h1 className="basis-[15%] text-6xl md:text-9xl font-bold text-white" >{id}</h1>
+            <div className="basis-[15%] text-6xl md:text-9xl font-bold text-white" >{id}</div>
             <div><video 
                 ref={videoRef}
                 src={video} 
