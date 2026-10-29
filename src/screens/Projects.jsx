@@ -1,13 +1,12 @@
-  import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './Projects.css';
-import portfoliyoVideo from '../assets/project/portfoliyo.mp4';
-import js30Video from '../assets/project/js30.mp4';
-import mli from '../assets/project/mli.mp4';
-import knowyourBharmVideo from '../assets/project/knowyourbharmre.mp4';
-import voice2NoteVideo from '../assets/project/Voice2notere.mp4';
-import swatchsahayakVideo from '../assets/project/swatchsahayak.mp4';
-import cyborgVideo from '../assets/project/cyborg.mp4';
-import calcaiVideo from '../assets/project/calcai.mp4';
+import ProjectPlaceholder from '../components/ProjectPlaceholder.jsx';
+
+// Every .mp4 in src/assets/project/, looked up by file name (e.g. 'cyborg.mp4').
+// To add a demo, drop a video with the name listed in projectsData below.
+const videoFiles = import.meta.glob('../assets/project/*.mp4', { eager: true, query: '?url', import: 'default' });
+const videoFor = (file) => (file ? videoFiles[`../assets/project/${file}`] : undefined);
+
 import Projectleft from '../components/Projectleft';
 import Projectright from '../components/Projectright';
 import useIsMobile from '../lib/useIsMobile.js';
@@ -18,72 +17,97 @@ export default function Projects() {
 
   const projectsData = [
     {
-      id: 1,
-      name: 'First Portfoliyo ',
-      description: 'This is my foundational portfolio website built with HTML and CSS. Highlight that it was your first project, emphasizing my journey into development, it laid the groundwork for my learning in web development. It includes features like a navigation bar, sidebar with social links, and multiple sections (About, Skills, Education, Contact).',
-      video: portfoliyoVideo,
-      link: 'https://github.com/Adarshmilan/firstproject',
-      live: 'https://adarshmilan.github.io/firstproject/',
-  
-    },
-    {
-      id: 2,
-      name: 'Javascript super30',
-      description: 'This project showcases my skills in HTML, CSS, and JavaScript by creating interactive web features like checkboxes, video players, and webcam integration. Building it deepened my understanding of DOM manipulation, event handling, and multimedia APIs, enhancing my frontend development expertise.',
-      video: js30Video,
-      link: 'https://github.com/Adarshmilan/Javascriptprojects',
-      live: 'https://adarshmilan.github.io/Javascriptprojects/showcase.html',
-
-    },
-    {
-      id: 3,
-      name: 'Know Your Bharm',
-      description: 'This is my real word project which is for kids that have curiosity about anything and everything but they don\'t have answers to their questions. I learned how to fetch and display JSON data, create interactive flip cards, and design a responsive UI. It helped me improve my skills in DOM manipulation, event handling and i have used Puter API to make a chatbot that can answer questions as kid can understand using my prompt engineering skills.',
-      video: knowyourBharmVideo,
-      link: 'https://github.com/Adarshmilan/Knowyourbhram',
-      live: 'https://adarshmilan.github.io/Knowyourbhram/',
-
-    },
-    {
-      id: 4,
-      name: 'Voice2Note',
-      description: 'This is also a real world problem solving project it\'s name is Voice2Note is a responsive web app I built using HTML, CSS, and JavaScript, focusing on real-time pitch detection and visualizing notes on a virtual piano. Through this project, I learned Web Audio API, signal processing, and responsive design, enhancing my skills in frontend development and audio analysis. and many singers who is starting their journey in singing can use this app to know about their pitch and they can improve their singing skills.',
-      video: voice2NoteVideo,
-      link: 'https://github.com/Adarshmilan/Voice2Note',
-      live: 'https://adarshmilan.github.io/Voice2Note/'
-
-    },
-    {
-      id: 5,
-      name: 'MultiLevel Inventory Management System',
-      description: 'This project is a comprehensive SCM system built with Java servlets, DAO pattern, and JSP for the frontend. I learned how to manage user roles, handle database transactions, and implement core features like inventory, purchase orders, and dashboards. Building this enhanced my understanding of web application architecture, session management, and integrating different components to create a functional, role-based supply chain management platform.',
-      video: mli,
-      link: 'https://github.com/Adarshmilan/miltilevelinventory',
-    },
-    {
-      id: 6,
-      name: 'Swachhta Sahayak',
-      description: 'This project is a waste management tool I built to streamline waste collection and tracking. I used HTML, CSS, and JavaScript for the frontend, creating multiple dashboards for admins, citizens, and workers. Through this, I learned how to organize complex UI components, manage user roles, and improve my skills in web development, especially in designing user-friendly interfaces and handling data flow across different sections of the app.This is a group project which we have prepared for the SIH 2024.',
-      video: swatchsahayakVideo,
-      link: 'https://github.com/Bharath-574/Swachhta-Sahayak',
-    },
-    {
-      id: 7,
       name: 'Cyborg City',
-      description: 'This project is a dynamic web app built with React, Tailwind CSS, and React Router, focusing on esports and gaming communities. I learned to implement responsive design, manage state with context, and organize complex routing. Building this enhanced my skills in frontend development, component structuring, and user experience. It reflects my growth in creating engaging, scalable interfaces and understanding how to integrate design with functionality for a seamless user journey.',
-      video: cyborgVideo,
-      link: 'https://github.com/Bharath-574/Swachhta-Sahayak',
+      tech: 'React · Node.js · Express · Supabase · Razorpay · PWA',
+      description: 'A full-stack Free Fire esports tournament platform used by 200+ players. Teams and squad invites, match registration, Razorpay payments, a live leaderboard and match reports. REST API in Node.js/Express with JWT auth, role-based admin middleware and a PostgreSQL (Supabase) database with realtime updates. Shipped as an installable PWA on Vercel and Render.',
+      video: 'cyborg.mp4',
+      link: 'https://github.com/Adarshmilan/Cyborg',
       live: 'https://cyborgcity.vercel.app/',
     },
     {
-      id: 8,
+      name: 'UniCart',
+      tech: 'Android app · Campus marketplace · Google Play',
+      description: 'A campus delivery marketplace app where students post requests and other students deliver them for a fee. It is live on Google Play with 200+ real users and is still growing.',
+      video: 'unicart.mp4',
+      link: 'https://github.com/Adarshmilan/unideli',
+      live: 'https://play.google.com/store/apps/details?id=com.hex.uncart',
+      liveLabel: 'Play Store',
+    },
+    {
+      name: 'PhoneShark',
+      tech: 'Kotlin · Android VpnService · Java NIO',
+      description: 'A Wireshark-style packet analyzer for Android that captures all of a phone\'s traffic without root, using a local VPN and a user-space TCP/UDP forwarding engine. Decodes IPv4/IPv6, TCP, UDP, ICMP, DNS, HTTP, TLS (SNI, ALPN) and QUIC, maps traffic to apps, flags unencrypted connections and exports .pcap files for Wireshark.',
+      video: 'phoneshark.mp4',
+      link: 'https://github.com/Adarshmilan/PhoneShark',
+    },
+    {
+      name: 'ZomHex',
+      tech: 'Godot 4 · GDScript · Shaders · Android',
+      description: 'A merge tower-defense game for Android with a drag-and-merge turret grid, boss waves and endless, data-driven difficulty. 3D turret models are rendered inside a 2D game with custom toon and outline shaders. Includes haptics, a portrait layout for any screen and a JSON save system. Coming to Google Play under the 2Hex developer account.',
+      video: 'zomhex.mp4',
+      link: 'https://github.com/Adarshmilan/GateBreak',
+      status: 'In testing',
+    },
+    {
+      name: 'Relapse-Guard',
+      tech: 'PyTorch · ResNet-18 · CIFAR-100 · Research',
+      description: 'Ongoing research on continual learning and machine unlearning: stopping forgotten knowledge from coming back when a model later learns similar tasks. The method stores a PCA "forget signature" of each deleted class and adds a guard loss during training. Built so far: a ResNet-18 pipeline, a Split CIFAR-100 benchmark, and EWC and experience-replay baselines.',
+      video: 'relapseguard.mp4',
+      link: 'https://github.com/Adarshmilan/CUL-continual-unlearning-',
+      status: 'In progress',
+    },
+    {
       name: 'CalcAI',
-      description: 'This project is a web-based calculator that leverages FastAPI for the backend and integrates Google Generative AI to analyze images with mathematical expressions. I learned how to build REST APIs, handle image processing, and communicate with AI models. Working on this enhanced my understanding of API design, image decoding, and prompt engineering for AI. It’s been a valuable experience in combining AI with web development to create intelligent, interactive tools.',
-      video: calcaiVideo,
+      tech: 'Python · FastAPI · Gemini · React · TypeScript',
+      description: 'A drawing-canvas app that sends hand-drawn equations to a vision LLM. It solves expressions, systems of equations, variable assignments and diagram word problems, and renders the answers with MathJax. A FastAPI service with a structured prompt and parser turns the model\'s output into JSON results.',
+      video: 'calcai.mp4',
       link: 'https://github.com/Adarshmilan/CalcAI',
     },
-
-  ];
+    {
+      name: 'Multi-Level Inventory & Supply Chain',
+      tech: 'Java · Servlets · JSP · MySQL · Docker',
+      description: 'A role-based web app for Admins, Warehouse Managers and Suppliers, built on MVC with Servlets, DAOs and JSP/JSTL views. Purchase orders and inter-warehouse stock transfers run as atomic database transactions with commit and rollback. Containerized with a multi-stage Docker build on Tomcat.',
+      video: 'mli.mp4',
+      link: 'https://github.com/Adarshmilan/miltilevelinventory',
+    },
+    {
+      name: 'ShareLive & Walkie-Talkie',
+      tech: 'Node.js · Express · Socket.IO · React',
+      description: 'Two real-time apps. ShareLive shares text across devices with 6-character room codes, live sync over Socket.IO and rooms that expire after 2 hours. The walkie-talkie backend is a push-to-talk server that relays audio chunks to channel members, with presence events and crash-safe handlers.',
+      video: 'sharelive.mp4',
+      link: 'https://github.com/Adarshmilan/sharelive',
+    },
+    {
+      name: 'GitCompass 404',
+      tech: 'Next.js · Gemma 4 · Ollama · Hacktoberfest 2026',
+      description: 'An AI contributor assistant for open-source projects that runs on a local LLM, built for Hacktoberfest 2026. As a core engineer on a 4-person team, I built the backend API pipeline, GitHub REST ingestion, rate limiting and in-memory caching.',
+      video: 'gitcompass.mp4',
+      link: 'https://github.com/Adarshmilan/hacktober2026',
+    },
+    {
+      name: 'Deep Learning Experiments',
+      tech: 'PyTorch · CUDA · Scikit-learn',
+      description: 'Neural networks built from scratch. A CNN with convolution, max-pooling and dropout reaching 99.01% test accuracy on MNIST; a Wide & Deep network for California Housing price regression (R² 0.766); and a Fashion-MNIST MLP with about 89% validation accuracy.',
+      video: 'deeplearning.mp4',
+      link: 'https://github.com/Adarshmilan/firstCNN',
+    },
+    {
+      name: 'Voice2Note',
+      tech: 'HTML · CSS · JavaScript · Web Audio API',
+      description: 'A web app for singers that detects pitch in real time and shows the notes on a virtual piano. Building it taught me the Web Audio API, signal processing and responsive design.',
+      video: 'Voice2notere.mp4',
+      link: 'https://github.com/Adarshmilan/Voice2Note',
+      live: 'https://adarshmilan.github.io/Voice2Note/',
+    },
+    {
+      name: 'Know Your Bharm',
+      tech: 'HTML · CSS · JavaScript · Puter API',
+      description: 'A learning app for curious kids with interactive flip cards loaded from JSON, plus a chatbot built with the Puter API and prompt engineering that answers questions in a way kids can understand.',
+      video: 'knowyourbharmre.mp4',
+      link: 'https://github.com/Adarshmilan/Knowyourbhram',
+      live: 'https://adarshmilan.github.io/Knowyourbhram/',
+    },
+  ].map((p, i) => ({ ...p, id: i + 1, video: videoFor(p.video) }));
 
   const [activeProject, setActiveProject] = useState(projectsData[0]);
   const isMobile = useIsMobile();
@@ -165,6 +189,9 @@ export default function Projects() {
               description={project.description} 
               link={project.link} 
               live={project.live}
+              tech={project.tech}
+              status={project.status}
+              liveLabel={project.liveLabel}
             />
           </div>
         ))}
@@ -175,8 +202,15 @@ export default function Projects() {
 
 function MobileProjects({ projects }) {
   const wrapperRef = useRef(null);
+  const sliderRef = useRef(null);
   const [page, setPage] = useState(0);
+  const [drag, setDrag] = useState(0); // px the finger has moved sideways
+  const pageRef = useRef(0);
   const count = projects.length;
+
+  useEffect(() => {
+    pageRef.current = page;
+  }, [page]);
 
   useEffect(() => {
     const onScroll = () => {
@@ -197,16 +231,71 @@ function MobileProjects({ projects }) {
     };
   }, [count]);
 
+  // Sideways swipe: scroll the page to the next/previous project's position,
+  // so swiping and vertical scrolling always agree on which project is shown.
+  useEffect(() => {
+    const el = sliderRef.current;
+    if (!el) return;
+    let startX = 0, startY = 0, mode = null; // mode: 'x' (swiping) | 'y' (scrolling) | null
+
+    const goTo = (target) => {
+      const wrapper = wrapperRef.current;
+      const top = wrapper.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({ top: top + target * window.innerHeight, behavior: 'smooth' });
+    };
+
+    const onStart = (e) => {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      mode = null;
+    };
+
+    const onMove = (e) => {
+      const dx = e.touches[0].clientX - startX;
+      const dy = e.touches[0].clientY - startY;
+      if (!mode && (Math.abs(dx) > 8 || Math.abs(dy) > 8)) {
+        mode = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+      }
+      if (mode !== 'x') return;
+      e.preventDefault(); // keep the page still while swiping sideways
+      const atEdge = (dx > 0 && pageRef.current === 0) || (dx < 0 && pageRef.current === count - 1);
+      setDrag(atEdge ? dx * 0.25 : dx); // resist at the first/last project
+    };
+
+    const onEnd = (e) => {
+      if (mode === 'x') {
+        const dx = e.changedTouches[0].clientX - startX;
+        const threshold = Math.min(80, window.innerWidth * 0.2);
+        const current = pageRef.current;
+        if (dx < -threshold && current < count - 1) goTo(current + 1);
+        else if (dx > threshold && current > 0) goTo(current - 1);
+      }
+      mode = null;
+      setDrag(0);
+    };
+
+    el.addEventListener('touchstart', onStart, { passive: true });
+    el.addEventListener('touchmove', onMove, { passive: false });
+    el.addEventListener('touchend', onEnd);
+    el.addEventListener('touchcancel', onEnd);
+    return () => {
+      el.removeEventListener('touchstart', onStart);
+      el.removeEventListener('touchmove', onMove);
+      el.removeEventListener('touchend', onEnd);
+      el.removeEventListener('touchcancel', onEnd);
+    };
+  }, [count]);
+
   return (
     // One screen of scrolling per project
     <div ref={wrapperRef} className="relative w-full" style={{ height: `${count * 100}svh`, backgroundColor: '#080807' }}>
-      <div className="sticky top-0 w-full overflow-hidden" style={{ height: '100svh' }}>
+      <div ref={sliderRef} className="sticky top-0 w-full overflow-hidden" style={{ height: '100svh', touchAction: 'pan-y' }}>
         <div
           className="flex h-full"
           style={{
             width: `${count * 100}vw`,
-            transform: `translateX(-${page * 100}vw)`,
-            transition: 'transform 0.7s cubic-bezier(0.65, 0, 0.35, 1)',
+            transform: `translateX(calc(-${page * 100}vw + ${drag}px))`,
+            transition: drag ? 'none' : 'transform 0.7s cubic-bezier(0.65, 0, 0.35, 1)',
           }}
         >
           {projects.map((project, i) => (
@@ -219,7 +308,9 @@ function MobileProjects({ projects }) {
                 <span className="text-xs tracking-[3px] text-gray-400 uppercase">Projects</span>
               </div>
 
-              <Projectvideo video={project.video} active={i === page} />
+              {project.video
+                ? <Projectvideo video={project.video} active={i === page} />
+                : <ProjectPlaceholder name={project.name} className="max-h-[28svh]" />}
 
               <h3 className="text-2xl font-bold text-white">
                 {i === page ? (
@@ -233,15 +324,19 @@ function MobileProjects({ projects }) {
                 ) : project.name}
               </h3>
 
-              <p className="text-[0.9rem] leading-relaxed text-gray-300">{project.description}</p>
+              <p className="text-[11px] uppercase tracking-[2px] text-cyan-300/80 -mt-2">{project.tech}</p>
+
+              <p className="text-[0.85rem] leading-relaxed text-gray-300">{project.description}</p>
 
               <div className="flex justify-between gap-3 mt-1">
                 <RainbowButton variant="outline" onClick={() => project.live && window.open(project.live, '_blank')}>
-                  {project.live ? 'Live' : 'Not deployed'}
+                  {project.live ? (project.liveLabel || 'Live') : (project.status || 'Not deployed')}
                 </RainbowButton>
-                <RainbowButton variant="outline" onClick={() => window.open(project.link, '_blank')}>
-                  Github
-                </RainbowButton>
+                {project.link && (
+                  <RainbowButton variant="outline" onClick={() => window.open(project.link, '_blank')}>
+                    Github
+                  </RainbowButton>
+                )}
               </div>
             </section>
           ))}

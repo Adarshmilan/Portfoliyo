@@ -3,7 +3,7 @@ import ScrollReveal from './ScrollReveal.jsx'
 import { RainbowButton } from './ui/rainbow-button.tsx';
 
 
-export default function Projectright({ id,name ,description,technologies,link,live }) {
+export default function Projectright({ name, description, tech, link, live, status, liveLabel }) {
 
     return(
         <div className='flex w-full md:w-[40vw] justify-around h-auto content-center flex-col' >
@@ -19,6 +19,9 @@ export default function Projectright({ id,name ,description,technologies,link,li
                     animateOn="view"
                 />
             </div>
+            {tech && (
+                <p className="text-xs md:text-sm uppercase tracking-[2px] text-cyan-300/80 mt-2 mb-1">{tech}</p>
+            )}
             <div className="description basis-[70%] text-sm text-gray-300" >
                 <ScrollReveal
                 baseOpacity={0.1}
@@ -30,18 +33,20 @@ export default function Projectright({ id,name ,description,technologies,link,li
                 </ScrollReveal>
             </div >
             <div  className="link basis-[10%] flex flex-row justify-between gap-3 md:pr-8 mt-4" >
-                <RainbowButton 
+                <RainbowButton
                     variant="outline"
-                    onClick={() => window.open(live, '_blank')}
+                    onClick={() => live && window.open(live, '_blank')}
                 >
-                    {live ? 'Live' : "Not deployed"}
+                    {live ? (liveLabel || 'Live') : (status || 'Not deployed')}
                 </RainbowButton>
-                <RainbowButton 
-                    variant="outline"
-                    onClick={() => window.open(link, '_blank')}
-                >
-                    Github
-                </RainbowButton>
+                {link && (
+                    <RainbowButton
+                        variant="outline"
+                        onClick={() => window.open(link, '_blank')}
+                    >
+                        Github
+                    </RainbowButton>
+                )}
             </div>
         </div>
     );

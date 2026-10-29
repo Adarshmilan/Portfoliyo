@@ -1,0 +1,129 @@
+\documentclass[10pt,a4paper]{article}
+
+% ---------- page setup (no geometry package needed) ----------
+\setlength{\paperwidth}{210mm}\setlength{\paperheight}{297mm}
+\setlength{\pdfpagewidth}{210mm}\setlength{\pdfpageheight}{297mm}
+\setlength{\textwidth}{186mm}\setlength{\oddsidemargin}{-13.4mm}
+\setlength{\textheight}{267mm}\setlength{\topmargin}{-19mm}
+\setlength{\headheight}{0pt}\setlength{\headsep}{0pt}\setlength{\footskip}{0pt}
+\setlength{\parindent}{0pt}
+\pagestyle{empty}
+
+\usepackage[hidelinks]{hyperref}
+
+% ---------- helpers ----------
+\renewcommand{\section}[1]{\vspace{6pt}{\large\bfseries\MakeUppercase{#1}}\\[-7pt]\rule{\textwidth}{0.6pt}\vspace{2pt}}
+\newcommand{\entry}[2]{\par\textbf{#1}\hfill #2\par}
+\newenvironment{points}{\vspace{-4pt}\begin{itemize}\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}\setlength{\topsep}{0pt}\setlength{\partopsep}{0pt}\setlength{\leftmargin}{12pt}}{\end{itemize}\vspace{-2pt}}
+\renewcommand{\labelitemi}{$\bullet$}
+\newcommand{\sep}{\enspace$|$\enspace}
+
+\begin{document}
+
+% ---------- header ----------
+\begin{center}
+  {\Huge\bfseries ADARSH MILAN}\\[3pt]
+  {\large Deep Learning Research \,---\, Full-Stack Development}\\[3pt]
+  Gujarat, India \sep
+  \href{mailto:adarshmilan92@gmail.com}{adarshmilan92@gmail.com} \sep
+  +91 6354521829 \sep
+  \href{https://www.linkedin.com/in/adarsh-milan-383527304}{LinkedIn} \sep
+  \href{https://github.com/Adarshmilan}{GitHub} \sep
+  \href{https://portfoliyo-zeta-indol.vercel.app/}{Portfolio}
+\end{center}
+
+B.E.\ Computer Science student focused on Artificial Intelligence, currently doing independent research on
+\textbf{continual learning and machine unlearning} in deep neural networks. Experienced in building and training
+models in \textbf{PyTorch} (MLPs, CNNs, ResNet-18, Wide \& Deep) and in shipping AI-powered applications with LLMs.
+Also a full-stack developer whose live products serve \textbf{400+ real users}. Looking to apply deep learning
+and computer vision to real-world problems.
+
+\section{Education}
+\entry{Marwadi University, Rajkot}{Aug 2024 -- Dec 2028}
+Bachelor of Engineering --- Computer Science \hfill GPA: 8.5\\
+
+\section{Skills}
+\textbf{Programming Languages:} Python, Java, JavaScript, TypeScript, Kotlin, C, C\#, SQL, PHP\\
+\textbf{Deep Learning:} PyTorch, torchvision, CNNs, ResNet, Continual Learning (EWC, Experience Replay), Machine Unlearning\\
+\textbf{Machine Learning:} Regression, Classification, TF-IDF \& Cosine Similarity, Scikit-learn, Pandas, NumPy, Matplotlib\\
+\textbf{Generative AI:} Google Gemini API, Gemma (Ollama, local LLMs), Prompt Engineering\\
+\textbf{Web \& Backend:} React, Next.js, Node.js, Express, FastAPI, Flask, Socket.IO, Streamlit\\
+\textbf{Databases \& Tools:} PostgreSQL, MySQL, MongoDB, Supabase, Git, Docker, Linux, AWS, Vercel, Godot, Android Studio\\
+
+\section{Experience}
+\entry{Northstar Innovation --- Software Engineering Intern (Remote)}{Aug 2026 -- Present}
+\begin{points}
+  \item Selected through a technical evaluation that involved building a Shopify Admin GraphQL API $\rightarrow$ PostgreSQL product data pipeline with pagination, upserts and error handling.
+  \item Work on backend system design and database management.
+  \item Integrate AI tools into software development and documentation workflows.
+\end{points}
+
+\section{Research (Ongoing)}
+\entry{Relapse-Guard: Stopping Knowledge Relapse in Continual Learning--Unlearning}{Oct 2026 -- Present}
+\textit{PyTorch, ResNet-18, CIFAR-10/100, Continual Learning, Machine Unlearning}\par
+\begin{points}
+  \item Studying Continual Learning--Unlearning (CLU), where a model receives a stream of ``learn'' and ``forget'' requests. Builds on UnCLe (Adhikari et al., 2025), which showed that forgotten knowledge often \emph{relapses} when the model later learns similar tasks.
+  \item Proposed method: store a PCA ``forget signature'' of each deleted class's feature directions and add a \textbf{guard loss} during later training, so the network cannot rebuild those directions. No forgotten images are kept.
+  \item Plan to verify forgetting \emph{inside the features} with linear probes and membership-inference attacks, not only at the output.
+  \item Completed so far: a ResNet-18 training pipeline, a Split CIFAR-100 class-incremental benchmark (10 tasks), a reproduction of catastrophic forgetting, and Elastic Weight Consolidation and experience-replay baselines, with all runs logged as accuracy matrices.
+  \item Next steps: DER++, unlearning baselines (BadTeacher), spill and relapse metrics, then the full Relapse-Guard method and ablations, with the aim of a paper.
+\end{points}
+
+\section{Live Products}
+\entry{Cyborg City --- Esports Tournament Platform \textnormal{\sep React, Node.js, Supabase, Razorpay}}{\href{https://cyborgcity.vercel.app}{cyborgcity.vercel.app}}
+\begin{points}
+  \item Built a full-stack Free Fire tournament platform used by \textbf{200+ players}, with team management, match registration, Razorpay payments, a live leaderboard, an admin panel and an installable PWA.
+\end{points}
+\entry{UniCart --- Campus Marketplace}{}
+\begin{points}
+  \item Built a campus delivery marketplace where students post requests and peers deliver them for a fee. It has \textbf{200+ real users} and is still growing.
+\end{points}
+\entry{GateBreak --- Mobile Game \textnormal{\sep Godot 4, GDScript, Shaders}}{Google Play (in review)}
+\begin{points}
+  \item Built a merge tower-defense game with 3D turrets rendered through custom toon and outline shaders, endless difficulty scaling and persistent upgrades. Published under the \textbf{2Hex} Play Store developer account.
+\end{points}
+
+\section{AI / ML Projects}
+\entry{CalcAI --- AI Handwritten Math Solver \textnormal{\sep Python, FastAPI, Gemini 2.5 Flash, React}}{}
+\begin{points}
+  \item Built a drawing-canvas app that sends hand-drawn equations to a vision LLM. It solves expressions, systems of equations, variable assignments and diagram word problems, and renders the answers with MathJax.
+  \item Designed a structured prompt and a parser that turns the model's output into JSON results.
+\end{points}
+\entry{CNN for Handwritten Digit Recognition \textnormal{\sep PyTorch, CUDA}}{}
+\begin{points}
+  \item Built a convolutional network from scratch (convolution, max-pooling, dropout) that reached \textbf{99.01\%} test accuracy on MNIST.
+\end{points}
+\entry{Neural Network Experiments \textnormal{\sep PyTorch, Scikit-learn}}{}
+\begin{points}
+  \item \textbf{Wide \& Deep network} for California Housing price regression (R$^2$ = 0.766, RMSE = 0.553).
+  \item \textbf{Fashion-MNIST MLP} (784--300--100--10) with about 89\% validation accuracy, and a 7--50--40--1 regression network with R$^2$ = 0.98.
+\end{points}
+\entry{CourseWise AI --- Course Recommendation System (TCS Hackathon) \textnormal{\sep Scikit-learn, Streamlit, Plotly}}{}
+\begin{points}
+  \item Built a personalized recommender that combines TF-IDF cosine similarity with weighted skill, interest, career and difficulty matching, plus an interactive analytics dashboard.
+\end{points}
+\entry{GitCompass 404 --- AI Contributor Assistant (Hacktoberfest 2026) \textnormal{\sep Next.js, Gemma 4, Ollama}}{}
+\begin{points}
+  \item Worked as a core engineer on a 4-person team and built the backend API pipeline, GitHub REST ingestion, rate limiting and in-memory caching for a local-LLM assistant.
+\end{points}
+
+\section{Other Projects}
+\begin{points}
+  \item \textbf{PhoneShark} (Android): a no-root, Wireshark-style packet analyzer that uses a local VPN. Decodes TCP, UDP, DNS, TLS and QUIC, attributes traffic to apps and exports \texttt{.pcap} files.
+  \item \textbf{Multi-Level Inventory \& SCM System} (Java Servlets, JSP, MySQL, Docker): role-based procurement and stock-transfer workflows using transactional DAOs.
+  \item \textbf{Real-time apps} (Node.js, Socket.IO): ShareLive for live text-sharing rooms, and a push-to-talk walkie-talkie audio relay server.
+  \item \textbf{Epoch} (Kotlin, Retrofit, Coroutines): an Android app with ``On this day in history'' cards from the Wikipedia API.
+\end{points}
+
+\section{Achievements \& Certifications}
+\begin{points}
+  \item Smart India Hackathon (SIH): built the \textit{Swachhta Sahayak} smart waste-management prototype.
+  \item TCS Hackathon (\textit{CourseWise AI}) \sep Hacktoberfest 2026 (\textit{GitCompass 404}, Team 404 Not Found).
+  \item Google AI Essentials (Google, Oct 2024) \sep Connect and Protect: Networks and Network Security (Google, Mar 2025).
+  \item CCNA: Switching, Routing, and Wireless Essentials (Cisco, Feb 2026) \sep Operating Systems Basics (Cisco, May 2026).
+\end{points}
+
+\section{Additional Information}
+\textbf{Languages:} English, Hindi\\
+\textbf{Strengths:} Research mindset, Fast learner, Problem solving, Shipping products end-to-end, Teamwork
+\end{document}

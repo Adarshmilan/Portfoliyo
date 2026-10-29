@@ -109,7 +109,7 @@ function App() {
       }}>
         <Aboutme />
       </div>
-      <div style={{ position: 'relative', height: isMobile ? 'auto' : '300vh' }}>
+      <div style={{ position: 'relative', height: isMobile ? 'auto' : '250vh' }}>
         <Skills />
       </div>
       <div style={{ backgroundColor: '#080807 ', position: 'relative' }}>

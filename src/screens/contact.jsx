@@ -2,6 +2,16 @@
 import { RainbowButton } from '../components/ui/rainbow-button';
 import '../styles/contact.css';
 
+// One CV per role, served from public/resume/
+const resumes = [
+  { role: 'Software Engineer', file: 'Adarsh_Milan_Resume_Software_Engineer.pdf' },
+  { role: 'Full Stack / Backend', file: 'Adarsh_Milan_Resume_Full_Stack_Backend.pdf' },
+  { role: 'AI / ML', file: 'Adarsh_Milan_Resume_AI_ML.pdf' },
+  { role: 'Networking & Security', file: 'Adarsh_Milan_Resume_Networking_Security.pdf' },
+  { role: 'Android / Mobile', file: 'Adarsh_Milan_Resume_Android_Mobile.pdf' },
+  { role: 'General', file: 'Adarsh_Milan_Resume_General.pdf' },
+];
+
 export default function Contact() {
   const [animated, setAnimated] = useState(false);
 
@@ -37,6 +47,24 @@ export default function Contact() {
             >
               Mail Me
             </RainbowButton>
+          </div>
+
+          {/* CV downloads */}
+          <div className="cv-section">
+            <p className="social-label">Download CV</p>
+            <p className="cv-hint">Pick the role you're hiring for</p>
+            <div className="cv-grid">
+              {resumes.map(({ role, file }) => (
+                <a key={file} className="cv-link" href={`/resume/${file}`} download={file}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M12 3v12" />
+                    <path d="m7 10 5 5 5-5" />
+                    <path d="M5 21h14" />
+                  </svg>
+                  <span>{role}</span>
+                </a>
+              ))}
+            </div>
           </div>
 
           {/* Social Links */}

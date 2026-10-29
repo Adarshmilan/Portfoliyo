@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState } from 'react';
+import ProjectPlaceholder from './ProjectPlaceholder.jsx';
 
 export default function Projectleft({ id,name ,video }) {
     const videoRef = useRef(null);
@@ -48,15 +49,20 @@ export default function Projectleft({ id,name ,video }) {
     return(
         <div ref={containerRef} className="projectleft md:sticky h-auto md:h-screen w-full md:w-[40vw] flex flex-col justify-around gap-3 md:gap-0" >
             <div className="basis-[15%] text-6xl md:text-9xl font-bold text-white" >{id}</div>
-            <div><video 
-                ref={videoRef}
-                src={video} 
-                loop 
-                muted 
-                preload="metadata"
-                playsInline
-                className="project-video basis-[70%] w-full rounded-lg" 
-            /></div>
+            <div>{video ? (
+                <video
+                    key={video}
+                    ref={videoRef}
+                    src={video}
+                    loop
+                    muted
+                    preload="metadata"
+                    playsInline
+                    className="project-video basis-[70%] w-full rounded-lg"
+                />
+            ) : (
+                <ProjectPlaceholder name={name} />
+            )}</div>
             <div className=" basis-[15%] hidden md:flex justify-end-safe w-full "><h2 className="text-2xl md:text-4xl font-bold text-white text-right" >{name}</h2></div>
         </div>
     )

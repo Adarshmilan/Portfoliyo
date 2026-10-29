@@ -1,8 +1,6 @@
-import { useState, useEffect, useMemo, useCallback, useRef } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import useIsMobile from "../lib/useIsMobile.js";
 import { IconCloud } from "../components/ui/icon-cloud";
-import Progress from "../components/progress";
-import background from '../assets/skillbg.jpg';
 import Particles from "../components/Particles.jsx"
 
 import typescriptIcon from '../assets/icons/typescript.svg';
@@ -79,100 +77,177 @@ const iconMap = {
     java: javaIcon,
 };
 
-// Skills array for Progress component
-const skillsDataArray = [
-    { name: "TypeScript", progress: 40 },
-    { name: "JavaScript", progress: 75 },
-    { name: "React", progress: 68 },
-    { name: "Node.js", progress: 20 },
-    { name: "Python", progress: 75 },
-    { name: "HTML5", progress: 95 },
-    { name: "CSS3", progress: 92 },
-    { name: "MySQL", progress: 88 },
-    { name: "PostgreSQL", progress: 70 },
-    { name: "MongoDB", progress: 52 },
-    { name: "Git", progress: 80 },
-    { name: "Figma", progress: 65 },
-    { name: "Tailwind CSS", progress: 88 },
-    { name: "Bootstrap", progress: 81 },
-    { name: "Java", progress: 85 },
-    { name: "Spring", progress: 55 },
+// How well I know each core skill (0-100), shown as bars
+const proficiency = [
+    { key: "html5", value: 95 },
+    { key: "css3", value: 92 },
+    { key: "mysql", value: 88 },
+    { key: "tailwindcss", value: 88 },
+    { key: "java", value: 85 },
+    { key: "bootstrap", value: 81 },
+    { key: "git", value: 80 },
+    { key: "javascript", value: 75 },
+    { key: "python", value: 75 },
+    { key: "postgresql", value: 70 },
+    { key: "react", value: 68 },
+    { key: "figma", value: 65 },
+    { key: "spring", value: 55 },
+    { key: "mongodb", value: 52 },
+    { key: "typescript", value: 40 },
+    { key: "node-dot-js", value: 20 },
 ];
 
-// Skills object for displaying skills by category
-const skillsCategoryData = {
-    "Programming Languages": ["typescript", "javascript", "python", "java", "c"],
+const categories = {
+    "Languages": ["typescript", "javascript", "python", "java", "c"],
     "Frontend": ["html5", "css3", "react", "bootstrap", "tailwindcss", "vite"],
     "Backend": ["node-dot-js", "spring", "fastapi", "apache", "apachetomcat"],
     "Databases": ["mysql", "postgresql", "mongodb", "supabase"],
-    "Version Control": ["git", "github", "gnubash", "linux"],
-    "Design & UI": ["figma", "photopea", "notion"],
-    "Data Science": ["pandas", "numpy"],
+    "Tools & OS": ["git", "github", "gnubash", "linux", "apachenetbeanside", "cisco"],
     "Deployment": ["render", "netlify", "vercel", "railway"],
-    "Other Tools": ["apachenetbeanside", "cisco"],
+    "Design & Data": ["figma", "photopea", "notion", "pandas", "numpy"],
 };
 
-const SkillCard = ({ skill }) => (
-    <div className="flex flex-col items-center justify-center gap-1 md:gap-2 p-2 md:p-3 rounded-lg hover:bg-blue-900 hover:bg-opacity-30 transition-all duration-300">
-        <img
-            src={iconMap[skill]}
-            alt={skill}
-            className="w-8 h-8 md:w-12 md:h-12 object-contain"
-        />
-        <span className="text-[10px] md:text-xs text-gray-300 text-center capitalize">
-            {skill.replace(/-dot-/g, '.').replace(/-/g, ' ')}
-        </span>
-    </div>
-);
+const labels = {
+    typescript: "TypeScript", javascript: "JavaScript", python: "Python", java: "Java", c: "C",
+    html5: "HTML5", css3: "CSS3", react: "React", bootstrap: "Bootstrap", tailwindcss: "Tailwind CSS", vite: "Vite",
+    "node-dot-js": "Node.js", spring: "Spring", fastapi: "FastAPI", apache: "Apache", apachetomcat: "Tomcat",
+    mysql: "MySQL", postgresql: "PostgreSQL", mongodb: "MongoDB", supabase: "Supabase",
+    git: "Git", github: "GitHub", gnubash: "Bash", linux: "Linux", apachenetbeanside: "NetBeans", cisco: "Cisco",
+    render: "Render", netlify: "Netlify", vercel: "Vercel", railway: "Railway",
+    figma: "Figma", photopea: "Photopea", notion: "Notion", pandas: "Pandas", numpy: "NumPy",
+};
 
-const SkillCategories = () => (
-    <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 px-4 md:px-0">
-        {Object.entries(skillsCategoryData).map(([category, skills]) => (
-            <div key={category} className="flex flex-col">
-                <h3 className="text-lg md:text-xl font-bold text-cyan-400 mb-3 md:mb-4 pb-2 border-b border-cyan-400 border-opacity-30">
-                    {category}
-                </h3>
-                <div className="grid grid-cols-4 gap-2 md:gap-4">
-                    {skills.map((skill) => (
-                        <SkillCard key={skill} skill={skill} />
-                    ))}
-                </div>
+// Black logos that would vanish on the dark background
+const darkIcons = new Set(["github", "vercel", "notion", "railway", "render"]);
+
+const levelOf = (v) => (v >= 85 ? "Advanced" : v >= 65 ? "Proficient" : v >= 45 ? "Intermediate" : "Learning");
+
+// Icon with a letter badge fallback (a few icon files are empty)
+function SkillIcon({ name, size = "w-7 h-7" }) {
+    const [broken, setBroken] = useState(false);
+    if (broken || !iconMap[name]) {
+        return (
+            <span className={`${size} rounded-md bg-cyan-400/15 text-cyan-300 text-[11px] font-bold flex items-center justify-center`}>
+                {labels[name].slice(0, 2).toUpperCase()}
+            </span>
+        );
+    }
+    return (
+        <img
+            src={iconMap[name]}
+            alt=""
+            className={`${size} object-contain ${darkIcons.has(name) ? "invert opacity-90" : ""}`}
+            onError={() => setBroken(true)}
+        />
+    );
+}
+
+const cardClass = "rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm";
+
+function ProficiencyCard() {
+    return (
+        <div className={`${cardClass} p-5 md:p-6 flex flex-col`}>
+            <div className="flex items-baseline justify-between mb-4">
+                <h3 className="text-lg md:text-xl font-bold text-white">Proficiency</h3>
+                <span className="text-[11px] uppercase tracking-[2px] text-gray-400">Core skills</span>
             </div>
-        ))}
-    </div>
-);
+            <ul className="flex flex-col gap-2.5">
+                {proficiency.map(({ key, value }) => (
+                    <li key={key} className="flex items-center gap-3">
+                        <SkillIcon name={key} size="w-5 h-5" />
+                        <span className="w-24 shrink-0 text-[13px] text-gray-200">{labels[key]}</span>
+                        <div className="flex-1 h-1.5 rounded-full bg-white/10 overflow-hidden">
+                            <div
+                                className="h-full rounded-full"
+                                style={{ width: `${value}%`, background: "linear-gradient(90deg, #22d3ee, #3b82f6)" }}
+                            />
+                        </div>
+                        <span className="w-20 shrink-0 text-right text-[11px] text-gray-400">{levelOf(value)}</span>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+}
+
+function ToolboxCard() {
+    const [active, setActive] = useState("All");
+    const shown = active === "All"
+        ? Object.values(categories).flat()
+        : categories[active];
+
+    return (
+        <div className={`${cardClass} p-5 md:p-6 flex flex-col min-w-0`}>
+            <div className="flex items-baseline justify-between mb-4">
+                <h3 className="text-lg md:text-xl font-bold text-white">Toolbox</h3>
+                <span className="text-[11px] uppercase tracking-[2px] text-gray-400">{shown.length} tools</span>
+            </div>
+
+            {/* Category filter (scrolls sideways on small screens) */}
+            <div className="flex md:flex-wrap gap-2 overflow-x-auto md:overflow-visible pb-2 mb-4 -mx-1 px-1" style={{ scrollbarWidth: "none" }}>
+                {["All", ...Object.keys(categories)].map((cat) => (
+                    <button
+                        key={cat}
+                        type="button"
+                        onClick={() => setActive(cat)}
+                        className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${
+                            active === cat
+                                ? "bg-cyan-400 text-black border-cyan-400"
+                                : "bg-transparent text-gray-300 border-white/15 hover:border-cyan-400/60"
+                        }`}
+                    >
+                        {cat}
+                    </button>
+                ))}
+            </div>
+
+            <div className="grid grid-cols-4 sm:grid-cols-5 lg:grid-cols-7 gap-2">
+                {shown.map((key) => (
+                    <div
+                        key={key}
+                        className="flex flex-col items-center justify-center gap-1.5 py-3 rounded-xl border border-white/5 bg-white/[0.02] hover:border-cyan-400/40 hover:bg-cyan-400/5 transition-colors"
+                    >
+                        <SkillIcon name={key} />
+                        <span className="text-[10px] md:text-[11px] text-gray-300 text-center leading-tight px-1">{labels[key]}</span>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+}
+
+function SkillsOverview() {
+    return (
+        <div className="w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-5 md:gap-6">
+            <ProficiencyCard />
+            <ToolboxCard />
+        </div>
+    );
+}
 
 export default function Skills() {
-    const [iclouddiss, setIclouddiss] = useState(0);
-    const [selectedSkill, setSelectedSkillState] = useState(skillsDataArray[0]);
+    const [slide, setSlide] = useState(0);
     const [bgColor, setBgColor] = useState('#061921');
     const rootRef = useRef(null);
     const isMobile = useIsMobile();
 
     const images = useMemo(() => Object.values(iconMap), []);
-    const memoizedSkillsData = useMemo(() => skillsDataArray, []);
 
-    const setSelectedSkill = useCallback((skill) => {
-        setSelectedSkillState(skill);
-    }, []);
-
-    // Desktop only: slide the three panels sideways while the section is pinned.
-    // Measured from where this section starts, so it stays in sync if sections above change height.
+    // Desktop only: while this section is pinned, slide from the icon cloud to the overview.
     useEffect(() => {
         if (isMobile) return;
         const handleScroll = () => {
             const vh = window.innerHeight;
             const wrapper = rootRef.current?.parentElement;
-            const start = wrapper ? wrapper.offsetTop : vh * 3.5;
-            const passed = (window.scrollY - start) / vh; // screens scrolled into this section
+            if (!wrapper) return;
+            const passed = -wrapper.getBoundingClientRect().top / vh; // screens scrolled into this section
 
-            const panel = Math.min(2, Math.max(0, passed));
-            setIclouddiss(panel * window.innerWidth);
+            setSlide(Math.min(1, Math.max(0, passed)) * window.innerWidth);
 
-            const scrollProgress = passed <= 0 ? 0 : Math.min(1, (passed + 1) / 3);
-            const r = Math.round(6 + (8 - 6) * scrollProgress);
-            const g = Math.round(25 + (8 - 25) * scrollProgress);
-            const b = Math.round(33 + (7 - 33) * scrollProgress);
+            const t = Math.min(1, Math.max(0, passed / 1.5));
+            const r = Math.round(6 + (8 - 6) * t);
+            const g = Math.round(25 + (8 - 25) * t);
+            const b = Math.round(33 + (7 - 33) * t);
             setBgColor(`rgb(${r}, ${g}, ${b})`);
         };
 
@@ -201,74 +276,53 @@ export default function Skills() {
         </div>
     );
 
-    // Phones: simple vertical stack (cloud -> categories -> proficiency)
+    const heading = (
+        <h2 className="text-4xl md:text-5xl font-bold text-white text-center" style={{ fontFamily: "'Lora', serif" }}>
+            Skills
+        </h2>
+    );
+
+    // Phones: simple vertical stack
     if (isMobile) {
         return (
             <div ref={rootRef} className="w-full relative overflow-hidden"
                 style={{ background: 'linear-gradient(to bottom, #061921 0%, #080807 100%)' }}
             >
                 {particles}
-                <div className="relative z-10 flex flex-col gap-12 py-16">
-                    <h2 className="text-4xl font-bold text-white text-center" style={{ fontFamily: "'Lora', serif" }}>
-                        Skills
-                    </h2>
-                    <div className="w-full flex justify-center px-4">
+                <div className="relative z-10 flex flex-col gap-10 py-16 px-4">
+                    {heading}
+                    <div className="w-full flex justify-center">
                         <div className="w-full max-w-[420px] flex justify-center">
                             <IconCloud images={images} />
                         </div>
                     </div>
-                    <SkillCategories />
-                    <div className="px-4">
-                        <Progress
-                            skillsData={memoizedSkillsData}
-                            selectedSkill={selectedSkill}
-                            setSelectedSkill={setSelectedSkill}
-                        />
-                    </div>
+                    <SkillsOverview />
                 </div>
             </div>
         );
     }
 
-    return(
-        <div ref={rootRef} className="w-full min-h-screen sticky  top-0 overflow-hidden relative"
-        style={{backgroundColor: bgColor,
-
-        }}
+    return (
+        <div ref={rootRef} className="w-full h-screen sticky top-0 overflow-hidden"
+            style={{ backgroundColor: bgColor }}
         >
             {particles}
 
-            <div className="relative z-10 flex flex-row w-full overflow-x-hidden">
-                {/* Icon Cloud Section */}
-                <div className="icon-cloud w-screen min-h-screen flex justify-center items-center flex-shrink-0"
-                style={{
-                        transform: `translateX(-${iclouddiss}px)`,
-                        transition: 'transform 0.5s ease-out',
-                    }}>
+            <div
+                className="relative z-10 flex flex-row h-full"
+                style={{ transform: `translateX(-${slide}px)`, transition: 'transform 0.5s ease-out' }}
+            >
+                {/* Icon cloud */}
+                <div className="w-screen h-full flex-shrink-0 flex justify-center items-center">
                     <div className="w-[80vw] flex justify-center">
                         <IconCloud images={images} />
                     </div>
                 </div>
 
-                <div className="skillslist w-screen min-h-screen py-12 flex-shrink-0"
-                    style={{
-                        transform: `translateX(-${iclouddiss}px)`,
-                        transition: 'transform 0.5s ease-out',
-                    }}>
-                    <SkillCategories />
-                </div>
-
-                {/* Progress/Proficiency Section */}
-                <div className="expertpercentage w-screen flex flex-row px-35 py-12 content-center justify-center min-h-screen" 
-                    style={{
-                        transform: `translateX(-${iclouddiss}px)`,
-                        transition: 'transform 0.5s ease-out',
-                    }}>
-                    <Progress 
-                        skillsData={memoizedSkillsData}
-                        selectedSkill={selectedSkill}
-                        setSelectedSkill={setSelectedSkill}
-                    />
+                {/* Proficiency + toolbox */}
+                <div className="w-screen h-full flex-shrink-0 flex flex-col justify-center gap-8 px-10">
+                    {heading}
+                    <SkillsOverview />
                 </div>
             </div>
         </div>

@@ -1,0 +1,112 @@
+\documentclass[10pt,a4paper]{article}
+
+% ---------- page setup (no geometry package needed) ----------
+\setlength{\paperwidth}{210mm}\setlength{\paperheight}{297mm}
+\setlength{\pdfpagewidth}{210mm}\setlength{\pdfpageheight}{297mm}
+\setlength{\textwidth}{186mm}\setlength{\oddsidemargin}{-13.4mm}
+\setlength{\textheight}{267mm}\setlength{\topmargin}{-19mm}
+\setlength{\headheight}{0pt}\setlength{\headsep}{0pt}\setlength{\footskip}{0pt}
+\setlength{\parindent}{0pt}
+\pagestyle{empty}
+
+\usepackage[hidelinks]{hyperref}
+
+% ---------- helpers ----------
+\renewcommand{\section}[1]{\vspace{6pt}{\large\bfseries\MakeUppercase{#1}}\\[-7pt]\rule{\textwidth}{0.6pt}\vspace{2pt}}
+\newcommand{\entry}[2]{\par\textbf{#1}\hfill #2\par}
+\newenvironment{points}{\vspace{-4pt}\begin{itemize}\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}\setlength{\topsep}{0pt}\setlength{\partopsep}{0pt}\setlength{\leftmargin}{12pt}}{\end{itemize}\vspace{-2pt}}
+\renewcommand{\labelitemi}{$\bullet$}
+\newcommand{\sep}{\enspace$|$\enspace}
+
+\begin{document}
+
+% ---------- header ----------
+\begin{center}
+  {\Huge\bfseries ADARSH MILAN}\\[3pt]
+  {\large Full-Stack \,---\, Backend Developer}\\[3pt]
+  Gujarat, India \sep
+  \href{mailto:adarshmilan92@gmail.com}{adarshmilan92@gmail.com} \sep
+  +91 6354521829\\[1pt]
+  \href{https://www.linkedin.com/in/adarsh-milan-383527304}{linkedin.com/in/adarsh-milan-383527304} \sep
+  \href{https://github.com/Adarshmilan}{github.com/Adarshmilan} \sep
+  \href{https://portfoliyo-zeta-indol.vercel.app/}{portfoliyo-zeta-indol.vercel.app}
+\end{center}
+
+Full-stack developer and B.E.\ Computer Science student focused on backend systems. Built and run live web
+applications with \textbf{400+ real users}, including payments, authentication, realtime features and admin tooling.
+Experienced with Node.js/Express, FastAPI, Flask and Java Servlets on PostgreSQL, MySQL and MongoDB, and with
+React/Next.js on the frontend. Currently a Software Engineering Intern working on data pipelines and backend design.
+
+\section{Education}
+\entry{Marwadi University, Rajkot}{Aug 2024 -- Dec 2028}
+Bachelor of Engineering --- Computer Science \hfill GPA: 8.5\\
+
+\section{Skills}
+\textbf{Languages:} JavaScript, TypeScript, Python, Java, SQL, PHP\\
+\textbf{Backend:} Node.js, Express, FastAPI, Flask, Java Servlets/JSP, REST \& GraphQL APIs, JWT auth, Socket.IO\\
+\textbf{Frontend:} React, Next.js, Vite, Tailwind CSS, PWA\\
+\textbf{Databases:} PostgreSQL, MySQL, MongoDB, Supabase\\
+\textbf{DevOps \& Tools:} Git, Docker, Linux, AWS, Vercel, Render, Netlify, Razorpay, Shopify Admin API\\
+
+\section{Experience}
+\entry{Northstar Innovation --- Software Engineering Intern (Remote)}{Aug 2026 -- Present}
+\begin{points}
+  \item Selected through a technical evaluation: built a Node.js importer that pulls all products and variants from the Shopify Admin GraphQL API (cursor pagination) and upserts them into PostgreSQL, with retry and error handling.
+  \item Work on backend system design and database management.
+  \item Integrate AI tools into software development and documentation workflows.
+\end{points}
+
+\section{Projects}
+\entry{Cyborg City --- Esports Tournament Platform \textnormal{\sep React, Node.js, Supabase, Razorpay}}{\href{https://cyborgcity.vercel.app}{cyborgcity.vercel.app}}
+\begin{points}
+  \item Built and run a full-stack Free Fire tournament platform used by \textbf{200+ players}: teams and squad invites, match registration, Razorpay payments, live leaderboard and match reports.
+  \item Designed a REST API in Node.js/Express with JWT authentication, role-based admin middleware and a PostgreSQL (Supabase) database, with realtime updates across the site.
+  \item Shipped it as an installable PWA; frontend on Vercel, backend on Render.
+\end{points}
+\entry{UniCart --- Campus Marketplace}{}
+\begin{points}
+  \item Built a campus delivery marketplace where students post requests and peers deliver them for a fee. It has \textbf{200+ real users} and is still growing.
+\end{points}
+\entry{Real-Time Apps --- ShareLive \& Walkie-Talkie Server \textnormal{\sep Node.js, Express, Socket.IO, React}}{}
+\begin{points}
+  \item \textbf{ShareLive}: share text across devices with 6-character room codes, live sync via Socket.IO and rooms that expire after 2 hours.
+  \item \textbf{Walkie-talkie backend}: push-to-talk server that relays audio chunks to channel members, with presence events and crash-safe handlers.
+\end{points}
+\entry{Multi-Level Inventory \& Supply Chain System \textnormal{\sep Java, Servlets, JSP, MySQL, Docker}}{}
+\begin{points}
+  \item Built a role-based (Admin, Warehouse Manager, Supplier) web app on the MVC pattern with Servlets, DAOs and JSP/JSTL views.
+  \item Implemented purchase-order and inter-warehouse stock-transfer workflows as atomic database transactions (commit/rollback), with the Post/Redirect/Get pattern; containerized with a multi-stage Docker build on Tomcat.
+\end{points}
+\entry{GitCompass 404 --- AI Contributor Assistant (Hacktoberfest 2026) \textnormal{\sep Next.js, Gemma 4, Ollama}}{}
+\begin{points}
+  \item Worked as a core engineer on a 4-person team and built the backend API pipeline, GitHub REST ingestion, rate limiting and in-memory caching for a local-LLM assistant.
+\end{points}
+\entry{Institute Telegram Bot \& Admin Panel \textnormal{\sep Python, python-telegram-bot, Flask, MySQL}}{}
+\begin{points}
+  \item Built an async Telegram bot that gives students their results, fees and attendance, plus a Flask admin panel to manage records and broadcast notices to all users.
+\end{points}
+\entry{CalcAI --- AI Handwritten Math Solver \textnormal{\sep Python, FastAPI, Gemini API, React, TypeScript}}{}
+\begin{points}
+  \item Built a FastAPI service and React canvas app that send hand-drawn equations to Google Gemini and return structured JSON answers, rendered with MathJax.
+\end{points}
+
+\section{Research (Ongoing)}
+\entry{Relapse-Guard: Stopping Knowledge Relapse in Continual Learning--Unlearning}{Oct 2026 -- Present}
+\textit{Python, PyTorch, ResNet-18, CIFAR-100}\par
+\begin{points}
+  \item Independent research on making neural networks truly forget deleted data, so that it does not come back (``relapse'') when the model keeps learning. Builds on UnCLe (Adhikari et al., 2025).
+  \item Built a reproducible experiment pipeline (Split CIFAR-100 benchmark, catastrophic-forgetting reproduction, EWC and experience-replay baselines, logged runs) and am developing a feature-level ``guard loss'', aiming for a paper.
+\end{points}
+
+\section{Achievements \& Certifications}
+\begin{points}
+  \item Smart India Hackathon (SIH): built the \textit{Swachhta Sahayak} smart waste-management prototype.
+  \item TCS Hackathon (\textit{CourseWise AI}) \sep Hacktoberfest 2026 (\textit{GitCompass 404}, Team 404 Not Found).
+  \item Google AI Essentials (Google, Oct 2024) \sep Connect and Protect: Networks and Network Security (Google, Mar 2025).
+  \item CCNA: Switching, Routing, and Wireless Essentials (Cisco, Feb 2026) \sep Operating Systems Basics (Cisco, May 2026).
+\end{points}
+
+\section{Additional Information}
+\textbf{Languages:} English, Hindi\\
+\textbf{Strengths:} API design, Debugging, Shipping products end-to-end, Fast learner, Teamwork
+\end{document}

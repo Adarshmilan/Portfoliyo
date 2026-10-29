@@ -335,3 +335,70 @@
     font-size: 0.9rem;
   }
 }
+
+
+/* CV downloads */
+.cv-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.cv-hint {
+  margin: 0 0 6px;
+  font-size: 0.9rem;
+  color: #8a8a96;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.cv-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  width: 100%;
+  max-width: 640px;
+}
+
+.cv-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(0, 212, 255, 0.06);
+  border: 1.5px solid rgba(0, 212, 255, 0.25);
+  color: #d6d6d6;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.cv-link svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.cv-link:hover,
+.cv-link:focus-visible {
+  border-color: rgba(0, 212, 255, 0.7);
+  background: rgba(0, 212, 255, 0.12);
+  color: #ffffff;
+}
+
+@media (max-width: 768px) {
+  .cv-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .cv-link {
+    padding: 12px 10px;
+    font-size: 0.8rem;
+  }
+}
