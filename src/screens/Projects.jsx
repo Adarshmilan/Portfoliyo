@@ -49,14 +49,6 @@ export default function Projects() {
       status: 'In testing',
     },
     {
-      name: 'Relapse-Guard',
-      tech: 'PyTorch · ResNet-18 · CIFAR-100 · Research',
-      description: 'Ongoing research on continual learning and machine unlearning: stopping forgotten knowledge from coming back when a model later learns similar tasks. The method stores a PCA "forget signature" of each deleted class and adds a guard loss during training. Built so far: a ResNet-18 pipeline, a Split CIFAR-100 benchmark, and EWC and experience-replay baselines.',
-      video: 'relapseguard.mp4',
-      link: 'https://github.com/Adarshmilan/CUL-continual-unlearning-',
-      status: 'In progress',
-    },
-    {
       name: 'CalcAI',
       tech: 'Python · FastAPI · Gemini · React · TypeScript',
       description: 'A drawing-canvas app that sends hand-drawn equations to a vision LLM. It solves expressions, systems of equations, variable assignments and diagram word problems, and renders the answers with MathJax. A FastAPI service with a structured prompt and parser turns the model\'s output into JSON results.',
@@ -76,14 +68,8 @@ export default function Projects() {
       description: 'Two real-time apps. ShareLive shares text across devices with 6-character room codes, live sync over Socket.IO and rooms that expire after 2 hours. The walkie-talkie backend is a push-to-talk server that relays audio chunks to channel members, with presence events and crash-safe handlers.',
       video: 'sharelive.mp4',
       link: 'https://github.com/Adarshmilan/sharelive',
-    },
-    {
-      name: 'GitCompass 404',
-      tech: 'Next.js · Gemma 4 · Ollama · Hacktoberfest 2026',
-      description: 'An AI contributor assistant for open-source projects that runs on a local LLM, built for Hacktoberfest 2026. As a core engineer on a 4-person team, I built the backend API pipeline, GitHub REST ingestion, rate limiting and in-memory caching.',
-      video: 'gitcompass.mp4',
-      link: 'https://github.com/Adarshmilan/hacktober2026',
-    },
+      live: 'https://sharelive.onrender.com/',
+    },    
     {
       name: 'Deep Learning Experiments',
       tech: 'PyTorch · CUDA · Scikit-learn',
@@ -181,7 +167,7 @@ export default function Projects() {
           <div 
             key={project.id}
             ref={(el) => projectRefs.current[index] = el}
-            className='h-auto  flex items-center justify-center my-12 md:py-0'
+            className='min-h-screen flex items-center justify-center py-16'
           >
             <Projectright 
               id={project.id} 
