@@ -54,6 +54,21 @@ export default function Projects() {
       description: 'A drawing-canvas app that sends hand-drawn equations to a vision LLM. It solves expressions, systems of equations, variable assignments and diagram word problems, and renders the answers with MathJax. A FastAPI service with a structured prompt and parser turns the model\'s output into JSON results.',
       video: 'calcai.mp4',
       link: 'https://github.com/Adarshmilan/CalcAI',
+      live: 'https://calcai-50046872763.development.catalystappsail.in',
+    },
+    {
+      name: 'Autouploader',
+      tech: 'Python · FFmpeg · yt-dlp · OpenRouter · YouTube & Instagram APIs · Docker',
+      description: 'Turns a long YouTube video into vertical Shorts and Reels and posts them to YouTube and Instagram from a simple web page. It pulls the transcript, uses an LLM to pick the most hyped moments, downloads only those parts and cuts each into a 1080×1920 clip. You review the clips, edit the text and press Post. It tracks the YouTube daily upload cap and Instagram\'s 24-hour limit, and clips over the cap upload automatically later. Runs in Docker.',
+      status: 'Self-hosted',
+      link: 'https://github.com/Adarshmilan/autouploader.git'
+    },
+    {
+      name: 'Unlearning in Continual Learning Is Shallow',
+      tech: 'Python · PyTorch · ResNet-18 · CIFAR-100 · Tiny-ImageNet',
+      description: 'A first-author paper on machine unlearning in continual learning. After a forget request the model\'s output is at chance, but linear probes on every ResNet-18 block still recover the forgotten task: unlearning removes 45–96% of its trace from the last block and at most 15% from the first, and after one new task it comes back 5–13 points above a retrain reference. Membership-inference audits miss it. 114 runs over 5 unlearning methods, 2 datasets and 2 replay learners (DER++, ER).',
+      link: 'https://github.com/Adarshmilan/CUL-continual-unlearning-',
+      status: 'Paper',
     },
     {
       name: 'Multi-Level Inventory & Supply Chain',

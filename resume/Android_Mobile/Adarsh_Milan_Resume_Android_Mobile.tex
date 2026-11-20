@@ -81,20 +81,23 @@ Bachelor of Engineering --- Computer Science \hfill GPA: 8.5\\
   \item Built a campus delivery marketplace where students post requests and peers deliver them for a fee. It has \textbf{200+ real users} and is still growing.
 \end{points}
 
-\section{Research (Ongoing)}
-\entry{Relapse-Guard: Stopping Knowledge Relapse in Continual Learning--Unlearning}{Oct 2026 -- Present}
-\textit{Python, PyTorch, ResNet-18, CIFAR-100}\par
+\entry{Autouploader --- AI Shorts \& Reels Generator \textnormal{\sep Python, FFmpeg, yt-dlp, OpenRouter, Docker}}{\href{https://github.com/Adarshmilan/autouploader}{GitHub}}
 \begin{points}
-  \item Independent research on making neural networks truly forget deleted data, so that it does not come back (``relapse'') when the model keeps learning. Builds on UnCLe (Adhikari et al., 2025).
-  \item Built a reproducible experiment pipeline (Split CIFAR-100 benchmark, catastrophic-forgetting reproduction, EWC and experience-replay baselines, logged runs) and am developing a feature-level ``guard loss'', aiming for a paper.
+  \item Built a self-hosted web app that turns a long YouTube video into vertical Shorts/Reels: it pulls the transcript, has an LLM pick the most hyped moments, downloads only those parts and cuts 1080$\times$1920 clips with FFmpeg.
+  \item Posts reviewed clips to YouTube (OAuth) and Instagram (Graph API) with a background worker that tracks each platforms daily limit and queues clips over the cap; runs in Docker.
+\end{points}
+\entry{Unlearning in Continual Learning Is Shallow --- First-Author Paper \textnormal{\sep Python, PyTorch, ResNet-18}}{\href{https://github.com/Adarshmilan/CUL-continual-unlearning-}{GitHub}}
+\begin{points}
+  \item Showed that machine unlearning in continual learning is shallow: after a forget request the output is at chance, yet linear probes on every ResNet-18 block still recover the forgotten task, and it comes back after the model learns one new task.
+  \item Ran 114 experiments ($\sim$30 GPU hours) across 5 unlearning methods (BadTeacher, NegGrad+, SCRUB, SalUn, random labels), CIFAR-100 and Tiny-ImageNet, and the DER++ and ER replay learners; released the code and a reference-aligned evaluation protocol.
 \end{points}
 
 \section{Achievements \& Certifications}
 \begin{points}
   \item Smart India Hackathon (SIH): built the \textit{Swachhta Sahayak} smart waste-management prototype.
   \item TCS Hackathon (\textit{CourseWise AI}) \sep Hacktoberfest 2026 (\textit{GitCompass 404}, Team 404 Not Found).
-  \item Google AI Essentials (Google, Oct 2024) \sep Connect and Protect: Networks and Network Security (Google, Mar 2025).
-  \item CCNA: Switching, Routing, and Wireless Essentials (Cisco, Feb 2026) \sep Operating Systems Basics (Cisco, May 2026).
+  \item \textbf{Google (Coursera):} Google AI Essentials (Oct 2024) \sep Foundations of Cybersecurity (Sep 2024) \sep Play It Safe: Manage Security Risks (Nov 2024) \sep Tools of the Trade: Linux and SQL (Jan 2025) \sep Connect and Protect: Networks and Network Security (Mar 2025).
+  \item \textbf{Cisco Networking Academy:} CCNA: Introduction to Networks (Feb 2026) \sep CCNA: Switching, Routing, and Wireless Essentials (Mar 2026) \sep Linux Essentials (Cisco \& NDG, Mar 2026) \sep Operating Systems Basics (Feb 2026).
 \end{points}
 
 \section{Additional Information}

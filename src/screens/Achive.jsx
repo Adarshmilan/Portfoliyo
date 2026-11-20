@@ -1,6 +1,9 @@
 import CardSwap, { Card } from '../components/CardSwap.jsx';
 import aicer from '../assets/certificate/AI.jpg';
 import ccnaNetwork from '../assets/certificate/CCNANetwork.jpg';
+import ccnaSRWE from '../assets/certificate/ccnaSRWE.png';
+import linuxEssentials from '../assets/certificate/linux.png';
+import osBasics from '../assets/certificate/osbasics.png';
 import connectProtect from '../assets/certificate/connectprotect.jpg';
 import cybersecurity from '../assets/certificate/cybersecurity.jpg';
 import hackathon from '../assets/certificate/hackathon.jpg';
@@ -19,9 +22,27 @@ export default function Achive() {
         },
         {
             id: 2,
-            name: 'CCNA Networking',
+            name: 'CCNA Introduction to Networks',
             description: 'networking fundamentals, including OSI/TCP/IP models, IP addressing (IPv4/IPv6), subnetting, Ethernet, router and switch configuration, network security basics, and troubleshooting connectivity in small networks.',
             certificateImage: ccnaNetwork,
+        },
+        {
+            id: 8,
+            name: 'CCNA Switching, Routing & Wireless',
+            description: 'Cisco CCNA: Switching, Routing, and Wireless Essentials. VLANs and inter-VLAN routing, STP, EtherChannel, DHCPv4/v6, first-hop redundancy (HSRP), switch security, wireless LANs (WLAN) and static routing, configured and troubleshot on Cisco devices.',
+            certificateImage: ccnaSRWE,
+        },
+        {
+            id: 9,
+            name: 'Cisco Linux Essentials',
+            description: 'Linux Essentials by Cisco Networking Academy and NDG. The Linux command line, files and directories, permissions, users and groups, processes, archiving, text processing with pipes and redirection, and basic shell scripting.',
+            certificateImage: linuxEssentials,
+        },
+        {
+            id: 10,
+            name: 'Cisco Operating Systems Basics',
+            description: 'Operating Systems Basics by Cisco Networking Academy. How operating systems manage processes, memory, storage and file systems, and how to install, configure and troubleshoot Windows and Linux.',
+            certificateImage: osBasics,
         },
         {
             id: 3,

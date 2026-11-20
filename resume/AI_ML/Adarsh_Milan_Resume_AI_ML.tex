@@ -32,7 +32,7 @@
   \href{https://portfoliyo-zeta-indol.vercel.app/}{Portfolio}
 \end{center}
 
-B.E.\ Computer Science student focused on Artificial Intelligence, currently doing independent research on
+B.E.\ Computer Science student focused on Artificial Intelligence, first author of a paper on
 \textbf{continual learning and machine unlearning} in deep neural networks. Experienced in building and training
 models in \textbf{PyTorch} (MLPs, CNNs, ResNet-18, Wide \& Deep) and in shipping AI-powered applications with LLMs.
 Also a full-stack developer whose live products serve \textbf{400+ real users}. Looking to apply deep learning
@@ -44,7 +44,7 @@ Bachelor of Engineering --- Computer Science \hfill GPA: 8.5\\
 
 \section{Skills}
 \textbf{Programming Languages:} Python, Java, JavaScript, TypeScript, Kotlin, C, C\#, SQL, PHP\\
-\textbf{Deep Learning:} PyTorch, torchvision, CNNs, ResNet, Continual Learning (EWC, Experience Replay), Machine Unlearning\\
+\textbf{Deep Learning:} PyTorch, torchvision, CNNs, ResNet, Continual Learning (DER++, Experience Replay), Machine Unlearning (SCRUB, SalUn, NegGrad+), Linear Probing, Membership Inference\\
 \textbf{Machine Learning:} Regression, Classification, TF-IDF \& Cosine Similarity, Scikit-learn, Pandas, NumPy, Matplotlib\\
 \textbf{Generative AI:} Google Gemini API, Gemma (Ollama, local LLMs), Prompt Engineering\\
 \textbf{Web \& Backend:} React, Next.js, Node.js, Express, FastAPI, Flask, Socket.IO, Streamlit\\
@@ -56,17 +56,6 @@ Bachelor of Engineering --- Computer Science \hfill GPA: 8.5\\
   \item Selected through a technical evaluation that involved building a Shopify Admin GraphQL API $\rightarrow$ PostgreSQL product data pipeline with pagination, upserts and error handling.
   \item Work on backend system design and database management.
   \item Integrate AI tools into software development and documentation workflows.
-\end{points}
-
-\section{Research (Ongoing)}
-\entry{Relapse-Guard: Stopping Knowledge Relapse in Continual Learning--Unlearning}{Oct 2026 -- Present}
-\textit{PyTorch, ResNet-18, CIFAR-10/100, Continual Learning, Machine Unlearning}\par
-\begin{points}
-  \item Studying Continual Learning--Unlearning (CLU), where a model receives a stream of ``learn'' and ``forget'' requests. Builds on UnCLe (Adhikari et al., 2025), which showed that forgotten knowledge often \emph{relapses} when the model later learns similar tasks.
-  \item Proposed method: store a PCA ``forget signature'' of each deleted class's feature directions and add a \textbf{guard loss} during later training, so the network cannot rebuild those directions. No forgotten images are kept.
-  \item Plan to verify forgetting \emph{inside the features} with linear probes and membership-inference attacks, not only at the output.
-  \item Completed so far: a ResNet-18 training pipeline, a Split CIFAR-100 class-incremental benchmark (10 tasks), a reproduction of catastrophic forgetting, and Elastic Weight Consolidation and experience-replay baselines, with all runs logged as accuracy matrices.
-  \item Next steps: DER++, unlearning baselines (BadTeacher), spill and relapse metrics, then the full Relapse-Guard method and ablations, with the aim of a paper.
 \end{points}
 
 \section{Live Products}
@@ -84,7 +73,19 @@ Bachelor of Engineering --- Computer Science \hfill GPA: 8.5\\
 \end{points}
 
 \section{AI / ML Projects}
-\entry{CalcAI --- AI Handwritten Math Solver \textnormal{\sep Python, FastAPI, Gemini 2.5 Flash, React}}{}
+\entry{Unlearning in Continual Learning Is Shallow --- First-Author Paper \textnormal{\sep Python, PyTorch, ResNet-18}}{\href{https://github.com/Adarshmilan/CUL-continual-unlearning-}{GitHub}}
+\begin{points}
+  \item Showed that machine unlearning in continual learning is shallow: after a forget request the output is at chance, yet linear probes on every ResNet-18 block still recover the forgotten task, and it comes back after the model learns one new task.
+  \item Found that unlearning removes 45--96\% of the forgotten task's trace from the last block but at most 15\% from the first; one new task later the last block is again 5--13 points above a retrain reference for every method.
+  \item Showed that standard audits miss this: forget accuracy is at chance and a membership-inference attack calls the data ``never seen'', while last-block probes stay 17--18 points above the reference.
+  \item Ran 114 experiments ($\sim$30 GPU hours) across 5 unlearning methods (BadTeacher, NegGrad+, SCRUB, SalUn, random labels), CIFAR-100 and Tiny-ImageNet, and the DER++ and ER replay learners; released the code and a reference-aligned evaluation protocol.
+\end{points}
+\entry{Autouploader --- AI Shorts \& Reels Generator \textnormal{\sep Python, FFmpeg, yt-dlp, OpenRouter, Docker}}{\href{https://github.com/Adarshmilan/autouploader}{GitHub}}
+\begin{points}
+  \item Built a self-hosted web app that turns a long YouTube video into vertical Shorts/Reels: it pulls the transcript, has an LLM pick the most hyped moments, downloads only those parts and cuts 1080$\times$1920 clips with FFmpeg.
+  \item Posts reviewed clips to YouTube (OAuth) and Instagram (Graph API) with a background worker that tracks each platforms daily limit and queues clips over the cap; runs in Docker.
+\end{points}
+\entry{CalcAI --- AI Handwritten Math Solver \textnormal{\sep Python, FastAPI, Gemini 2.5 Flash, React}}{\href{https://calcai-50046872763.development.catalystappsail.in}{Live demo}}
 \begin{points}
   \item Built a drawing-canvas app that sends hand-drawn equations to a vision LLM. It solves expressions, systems of equations, variable assignments and diagram word problems, and renders the answers with MathJax.
   \item Designed a structured prompt and a parser that turns the model's output into JSON results.
@@ -119,8 +120,8 @@ Bachelor of Engineering --- Computer Science \hfill GPA: 8.5\\
 \begin{points}
   \item Smart India Hackathon (SIH): built the \textit{Swachhta Sahayak} smart waste-management prototype.
   \item TCS Hackathon (\textit{CourseWise AI}) \sep Hacktoberfest 2026 (\textit{GitCompass 404}, Team 404 Not Found).
-  \item Google AI Essentials (Google, Oct 2024) \sep Connect and Protect: Networks and Network Security (Google, Mar 2025).
-  \item CCNA: Switching, Routing, and Wireless Essentials (Cisco, Feb 2026) \sep Operating Systems Basics (Cisco, May 2026).
+  \item \textbf{Google (Coursera):} Google AI Essentials (Oct 2024) \sep Foundations of Cybersecurity (Sep 2024) \sep Play It Safe: Manage Security Risks (Nov 2024) \sep Tools of the Trade: Linux and SQL (Jan 2025) \sep Connect and Protect: Networks and Network Security (Mar 2025).
+  \item \textbf{Cisco Networking Academy:} CCNA: Introduction to Networks (Feb 2026) \sep CCNA: Switching, Routing, and Wireless Essentials (Mar 2026) \sep Linux Essentials (Cisco \& NDG, Mar 2026) \sep Operating Systems Basics (Feb 2026).
 \end{points}
 
 \section{Additional Information}
